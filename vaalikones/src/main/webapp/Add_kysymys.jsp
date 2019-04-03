@@ -21,7 +21,7 @@ input {
 		<img id="headerimg" src="Logo.png" width="720" /> <br>
 
 		<h3>Kirjoita kysymys tähän:</h3>
-		<input type="text" step="any" name="kysymys_add" id="kysymysnappi">
+		<input type="text" step="any" name="kysymys_add" id="kysymystext">
 
 		<form action="plääplää">
 			<input id="submitnappi" type="submit" value="Lisää kysymys"
@@ -33,6 +33,7 @@ input {
 				Connection connection = null;
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				connection = DriverManager.getConnection(connectionURL, "pena", "kukkuu");
+				String queryString = "insert into stu_info(kysymystext) values(?)";
 				if (!connection.isClosed())
 					out.println("Successfully connected to " + "MySQL server using TCP/IP...");
 
