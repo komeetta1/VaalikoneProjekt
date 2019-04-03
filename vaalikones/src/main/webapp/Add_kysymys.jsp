@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Kysymyksen lisï¿½ys</title>
+<title>Kysymyksen lisays</title>
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -23,10 +23,10 @@ input {
 		<h3>Kirjoita kysymys:</h3>
 		<input type="text" step="any" name="kysymys_add" id="kysymystext">
 
-		<form action="/kysymys_Servlet">
-			<input id="submitnappi" type="submit" value="Lisää kysymys"
-				name="btnAloita" />
+		<form action="/kysymys_Servlet" method = "GET">
+			<input id="submitnappi" type="submit" value="Lisaa kysymys" name="btnAloita" />
 		</form>
+
 
 
 	</div>
