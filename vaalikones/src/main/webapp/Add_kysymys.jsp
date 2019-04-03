@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Kysymyksen lisäys</title>
+<title>Kysymyksen lisï¿½ys</title>
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -20,12 +20,29 @@ input {
 
 		<img id="headerimg" src="Logo.png" width="720" /> <br>
 
-		<h3>Kirjoita kysymys tähän:</h3>
+		<h3>Kirjoita kysymys tï¿½hï¿½n:</h3>
 		<input type="text" step="any" name="kysymys_add" id="kysymystext">
 
-		<form action="plääplää">
-			<input id="submitnappi" type="submit" value="Lisää kysymys"
+		<form action="plï¿½ï¿½plï¿½ï¿½">
+			<input id="submitnappi" type="submit" value="Lisï¿½ï¿½ kysymys"
 				name="btnAloita" />
+			<%
+				try {
+					String connectionURL = "jdbc:mysql://localhost:3306/vaalikone";
+					Connection connection = null;
+					Class.forName("com.mysql.jdbc.Driver").newInstance();
+					connection = DriverManager.getConnection(connectionURL, "pena", "kukkuu");
+					if (!connection.isClosed())
+						out.println("Successfully connected to " + "MySQL server using TCP/IP...");
+
+					String queryString = "insert into stu_info(Name,City,Phone) values(?,?,?)";
+					pstatement = connection.prepareStatement(queryString);
+					
+					connection.close();
+				} catch (Exception ex) {
+					out.println("Unable to connect to database.");
+				}
+			%>
 		</form>
 		<%
 			try {
@@ -37,11 +54,6 @@ input {
 				if (!connection.isClosed())
 					out.println("Successfully connected to " + "MySQL server using TCP/IP...");
 
-				connection.close();
-			} catch (Exception ex) {
-				out.println("Unable to connect to database.");
-			}
-		%>
 
 
 	</div>
