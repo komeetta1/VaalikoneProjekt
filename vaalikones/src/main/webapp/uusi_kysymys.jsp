@@ -1,3 +1,10 @@
+<%@page import="vaalikone.kysymys_Servlet"%>
+<%@page import="persist.Kysymykset"%>
+<%@page import="persist.Vastaukset"%>
+<%@page import="java.util.List"%>
+<%@page import="persist.Ehdokkaat"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,10 +30,6 @@ input {
 				id="submitnappi" type="submit" value="Lisaa kysymys"
 				name="btnAloita" />
 		</form>
-
-
-
 	</div>
 </body>
-
 </html>

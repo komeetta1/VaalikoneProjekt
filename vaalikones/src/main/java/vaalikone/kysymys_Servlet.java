@@ -8,10 +8,18 @@ import java.sql.Connection;
 import java.io.*;
 
 import javax.naming.NamingException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.sql.Statement;
 import com.sun.xml.bind.CycleRecoverable.Context;
+
+import persist.Kysymykset;
+
 import com.*;
 import java.*;
 
@@ -70,6 +78,27 @@ public class kysymys_Servlet extends HttpServlet {
 			System.err.println("Got an exception!");
 			System.err.println(e.getMessage());
 		}
-
 	}
+	
+	// JOTAIN JPA YRITYSTÄ TÄSSÄ HAETTU.
+	
+	/*
+	public void lisaaKysymys(Kysymykset kysymys) {
+
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		
+		try {
+			emf = Persistence.createEntityManagerFactory("vaalikones");
+			em = emf.createEntityManager();
+		}catch (Exception e) {
+			return;
+		}
+		
+		try {
+			em.persist(kysymys);
+		}catch (Exception e) {
+			e.getMessage();
+		}
+	}*/
 }
