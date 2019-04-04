@@ -44,38 +44,6 @@ public class kysymys_Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// PrintWriter out = response.getWriter();
-
-		// String kysymys = request.getParameter("kysymys_add");
-
-		// out.print(kysymys);
-		// Connection conn = null;
-
-		try {
-			Connection conn = null;
-			String kysymys = request.getParameter("kysymys_add");
-
-			// create a mysql database connection
-			String myDriver = "com.mysql.jdbc.Driver";
-			String myUrl = "jdbc:mysql://localhost:3306/vaalikone";
-			Class.forName(myDriver);
-			conn = DriverManager.getConnection(myUrl, "pena", "kukkuu");
-
-			// the mysql insert statement
-			String query = "INSERT INTO kysymykset VALUES ('" + kysymys + "')";
-
-			// create the mysql insert preparedstatement
-			java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
-			preparedStmt.setString(0, kysymys);
-
-			// execute the preparedstatement
-			preparedStmt.execute();
-
-			conn.close();
-		} catch (Exception e) {
-			System.err.println("Got an exception!");
-			System.err.println(e.getMessage());
-		}
 	}
 
 	/**
