@@ -51,11 +51,12 @@ public class Kysymykset implements Serializable {
      *
      * @param kysymysId
      */
-    public Kysymykset(Integer kysymysId) {
+    public Kysymykset(int kysymysId, String kysymys) {
         this.kysymysId = kysymysId;
+        this.kysymys = kysymys;
     }
 
-    /**
+	/**
      *
      * @return
      */
@@ -106,7 +107,7 @@ public class Kysymykset implements Serializable {
 
     @Override
     public String toString() {
-        return "persist.Kysymykset[ kysymysId=" + kysymysId + " ]";
+        return kysymysId + " " + kysymys;
     }
     private static final Logger LOG = Logger.getLogger(Kysymykset.class.getName());
     
