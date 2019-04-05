@@ -55,6 +55,9 @@ public class Vaalikone extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+    	
+    	
+    	
         int kysymys_id;
 
         // hae http-sessio ja luo uusi jos vanhaa ei ole vielä olemassa
