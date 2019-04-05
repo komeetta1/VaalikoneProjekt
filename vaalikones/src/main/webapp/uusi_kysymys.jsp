@@ -3,6 +3,8 @@
 <%@page import="persist.Vastaukset"%>
 <%@page import="java.util.List"%>
 <%@page import="persist.Ehdokkaat"%>
+<%@page import="vaalikone.Kysymys_poisto"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -26,21 +28,19 @@ input {
 		<h3>Kirjoita kysymys:</h3>
 
 		<form action="/kysymys_Servlet" method="post">
-			<input type="text" step="any" name="kysymys_add"> 
-			<input
+			<input type="text" step="any" name="kysymys_add"> <input
 				id="submitnappi" type="submit" value="Lisaa kysymys"
 				name="btnAloita" />
 		</form>
+
+		<br>
 		
-		<br><br>
-		
-		<h3>Poista kysymys</h3>
-		<form action="/kysymys_Poisto" method = "POST">
-		
-		<input
-				id="submitnappi" type="submit" value="Poista kysymys"
+		<form action = "/Kysymys_poisto" method = "GET">
+			
+			<input type="submit" value="Siirry kysymyksien poistoon"
 				name="btnPoista" />
 		</form>
+		
 	</div>
 </body>
 </html>

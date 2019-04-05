@@ -43,8 +43,8 @@
 				type="submit" id="submitnappi" value="Vastaa" />
 		</form>
 		<div class="kysymys">
-			<small>1=Täysin eri mieltä 2=Osittain eri mieltä 3=En osaa
-				sanoa, 4=Osittain samaa mieltä 5=Täysin samaa mieltä</small>
+			<small>1 = Täysin eri mieltä<br>2 = Osittain eri mieltä<br>3 = En osaa
+				sanoa<br>4 = Osittain samaa mieltä<br>5 = Täysin samaa mieltä</small>
 		</div>
 		<%
 			}
