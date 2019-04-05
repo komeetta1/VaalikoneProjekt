@@ -26,9 +26,20 @@ input {
 		<h3>Kirjoita kysymys:</h3>
 
 		<form action="/kysymys_Servlet" method="post">
-			<input type="text" step="any" name="kysymys_add"> <input
+			<input type="text" step="any" name="kysymys_add"> 
+			<input
 				id="submitnappi" type="submit" value="Lisaa kysymys"
 				name="btnAloita" />
+		</form>
+		
+		<br><br>
+		
+		<h3>Poista kysymys</h3>
+		<form action="/kysymys_Poisto" method = "POST">
+		
+		<input
+				id="submitnappi" type="submit" value="Poista kysymys"
+				name="btnPoista" />
 		</form>
 	</div>
 </body>
