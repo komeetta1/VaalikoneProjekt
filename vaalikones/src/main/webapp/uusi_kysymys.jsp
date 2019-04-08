@@ -41,6 +41,11 @@ input {
 				name="btnPoista" />
 		</form>
 		
+		<form action = "index.html" method = "GET">
+			
+			<input type="submit" value="Siirry etusivulle"
+				name="btnEtusivu" />
+		</form>
 	</div>
 </body>
 </html>
