@@ -37,19 +37,20 @@ public class KysymystenHaku extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		
+
+		processRequest(request, response);
 		// Testaa kysymyksen hakua tietokannasta kysymys IDn perusteella: 
-		// response.getWriter().println(haeKysymys(5));
-		
-		// Tämä toimii niin, että tulostaa tietokannan kysymykset mutta ilman IDtä:
-		
-		for (Kysymykset g: haeKysymyksetKaikki()) {
-			out.println(g);
-		}
-		
+		// response.getWriter().println(haeKysymys(5));	
 	}
 	
+	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
+		//haeKysymyksetKaikki();
+		List<Kysymykset> kaikkiKysymykset = haeKysymyksetKaikki();
+        
+        //ohjaa tiedot tulosten esityssivulle
+        request.setAttribute("kaikkiKysymykset", kaikkiKysymykset);
+	}
+
 	// Hakee kysymyksen ID:llä, ja tulostaa sen
 	public Kysymykset haeKysymys(int kysymysID) {
         EntityManagerFactory emf=null;
@@ -90,7 +91,6 @@ public class KysymystenHaku extends HttpServlet {
 	        
 	        return kysymysList;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         return null;
