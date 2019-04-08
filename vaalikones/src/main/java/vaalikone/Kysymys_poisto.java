@@ -72,7 +72,8 @@ public class Kysymys_poisto extends HttpServlet {
 			}
 			
 			out.println("<form action='Kysymys_poisto_handler' method='POST'/>");
-			out.println("<input type='text' name='poista'</input>");
+			out.println("<p>Syötä poistettavan kysymyksen ID</p>");
+			out.println("<input type='text' name='poista'</input>");	
 			out.println("<input type='submit' value='Poista kysymys'</input>");
 			out.println("</form>");
 			out.println("<form action='uusi_kysymys.jsp' method='POST'/>");
