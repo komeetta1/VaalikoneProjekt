@@ -37,7 +37,7 @@ input {
 		
 		<form action = "/Kysymys_poisto">
 			
-			<input type="submit" value="Siirry kysymyksien poistoon"
+			<input type="submit" value="Siirry kysymyksien hallintaan"
 				name="btnPoista" />
 		</form>
 		

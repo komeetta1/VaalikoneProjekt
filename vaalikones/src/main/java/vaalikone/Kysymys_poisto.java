@@ -62,7 +62,7 @@ public class Kysymys_poisto extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			
 			ResultSet rs = st.executeQuery(query);
-			out.println("<h2>Otsikko</h2>");
+			out.println("<h2>Kysymyksien hallinta</h2>");
 			
 			while (rs.next()) {
 				out.print(rs.getString("kysymys_id"));
