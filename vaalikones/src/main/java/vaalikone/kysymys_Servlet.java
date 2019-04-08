@@ -73,6 +73,7 @@ public class kysymys_Servlet extends HttpServlet {
 			st.executeUpdate("INSERT INTO kysymykset (kysymys) VALUES ('"+kysymys+"')");
 
 			conn.close();
+			
 			RequestDispatcher reqdisp = request.getRequestDispatcher("/Kysymys_poisto");
 			reqdisp.forward(request, response);
 		}catch (Exception e) {

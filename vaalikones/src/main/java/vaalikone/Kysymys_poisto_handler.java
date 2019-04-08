@@ -34,7 +34,6 @@ public class Kysymys_poisto_handler extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -58,7 +57,6 @@ public class Kysymys_poisto_handler extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/Kysymys_poisto");
 			System.out.println("Kysymys poistettu.");
 		} catch (Exception e) {
-			// TODO: handle exception
 		} finally {
 			try {
 				con.close();

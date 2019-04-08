@@ -71,18 +71,19 @@ public class Kysymys_poisto extends HttpServlet {
 				out.println("<br>");
 			}
 			
-			
-			
 			out.println("<form action='Kysymys_poisto_handler' method='POST'/>");
 			out.println("<input type='text' name='poista'</input>");
 			out.println("<input type='submit' value='Poista kysymys'</input>");
+			out.println("</form>");
+			out.println("<form action='uusi_kysymys.jsp' method='POST'/>");
+			out.println("<input type='submit' value='Palaa' name='palaabtn'</input>");
+			out.println("</form>");
 			
 			st.close();
 			
 		}catch (Exception e) {
 			e.getMessage();
 		}
-		
 		/*
 		
 		for (Kysymykset g : haeKysymyksetKaikki()) {
@@ -97,7 +98,6 @@ public class Kysymys_poisto extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 	/*
