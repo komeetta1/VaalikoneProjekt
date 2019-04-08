@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.*,vaalikone.Vaalikone,persist.*"%>
+<%@page import="java.util.*,vaalikone.Vaalikone,vaalikone.KysymystenHaku,persist.*"%>
 <!doctype html>
 <html>
 <head>
@@ -23,11 +23,18 @@
 
 
  <%
-            @SuppressWarnings("unchecked") 
+			RequestDispatcher rd=request.getRequestDispatcher("KysymystenHaku");
+			rd.include(request, response);
+ 
+            @SuppressWarnings("unchecked")
+            
             List<Kysymykset> kysymykset = (List<Kysymykset>)request.getAttribute("kysymykset");
+			int size = 0;
+			size = kysymykset.size();
+			
             for (Kysymykset kysymys : kysymykset) { %>
             <div class="kysymys">
-                <%= kysymys.getKysymysId() %> / 19 <br>
+                <%= kysymys.getKysymysId() %> / <%= size %> <br>
                 <%= kysymys.getKysymys() %>
                  </div>
                 <form action="Vaalikone" id="vastausformi">

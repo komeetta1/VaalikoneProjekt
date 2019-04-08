@@ -1,3 +1,5 @@
+<%@page import="java.awt.print.Printable"%>
+<%@page import="java.util.*,vaalikone.KysymystenHaku,vaalikone.EhdokkaidenHaku,persist.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -10,6 +12,15 @@
 </head>
 <body>
 	<div id="container">
+		<%  
+		RequestDispatcher rdKH=request.getRequestDispatcher("KysymystenHaku");
+		rdKH.include(request, response);
+		List<Kysymykset> kysymykset = (List<Kysymykset>)request.getAttribute("kaikkiKysymykset");
+		
+		RequestDispatcher rdEH=request.getRequestDispatcher("EhdokkaidenHaku");
+		rdEH.include(request, response);
+		List<Ehdokkaat> ehdokkaat = (List<Ehdokkaat>)request.getAttribute("kaikkiEhdokkaat");
+		%>
 
 		<img id="headerimg" src="Logo.png" width="720" />
 		<div class="kysymys">
@@ -22,10 +33,58 @@
 			<select name="vastaaja">
 				<!-- Tähän kai pitäisi tehdä java-looppi joka lukee ehdokkaan IDn ja nimen
 				ja tulostaa ne oikein optioniksi, kuten alla: -->
-				<option value="ehdokkaan id tähän">ehdokkaan nimi tähän</option>
-			</select> <input id="submitnappi" type="submit" value="vastaa"
-				name="btnEhVastaa" />
+				<%
+					for(Ehdokkaat ehdokas : ehdokkaat) {%>
+						<option value=<%ehdokas.getEhdokasId();%>><%=ehdokas.getEhdokasId() %> - <%=ehdokas.getEtunimi() %>  <%=ehdokas.getSukunimi() %> - <%=ehdokas.getPuolue() %></option>
+					<%}
+				%>
+				
+			</select>
+		<p>Tähän listataan kysymykset</p>
+		
+
+		<div class=kysymys2>	
+		<%
+		if (kysymykset==null){
+			out.println("KYsymyslista oli tyhjä, ja tämä on virheilmoitus: oh no :| ");
+			return;
+		}
+		%>
+		<table id=vastaustaulu>
+		
+		<%for (Kysymykset kysymys : kysymykset) {
+			// tulostaa kysymykset konsoliin, lähinnä debuggausta varten
+			// System.out.println(kysymys);%>
+			<tr>
+				<td>Kysymys nro. <%= kysymys.getKysymysId() %></td>
+				<td><%= kysymys.getKysymys() %></td>
+			</tr>
+			<tr>
+					<td>
+                    <label>1</label><input type="radio" name="vastaus" value="1" /><small>Täysin eri mieltä</small><br>
+                    <label>2</label><input type="radio" name="vastaus" value="2" /><small>Osittain eri mieltä</small><br>
+                    <label>3</label><input type="radio" name="vastaus" value="3" checked="checked" /><small>En osaa sanoa</small><br>
+                    <label>4</label><input type="radio" name="vastaus" value="4" /><small>Osittain samaa mieltä</small><br>
+                    <label>5</label><input type="radio" name="vastaus" value="5" /><small>Täysin samaa mieltä</small><br>
+                  	</td>
+                  	
+                  	<td><p><small>Kirjoita tähän perustelut vastaukselle (max. 100 merkkiä)</small></p>
+                  	<textarea name="perusteluBox" cols="50" rows="5"></textarea>
+                  	</td>
+			</tr>
+			<tr>
+			<td><hr></td>
+			</tr>
+			
+		<%}%>
+		</table>
+		<input id="submitnappi" type="submit" value="vastaa" name="btnEhVastaa" />
+		</div>
+		
+				
 		</form>
+		
+		
 
 
 	</div>
