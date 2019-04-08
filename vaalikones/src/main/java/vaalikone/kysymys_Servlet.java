@@ -7,6 +7,7 @@ import java.util.Hashtable;
 import java.sql.Connection;
 import java.io.*;
 
+
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,6 +28,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import com.google.cloud.sql.jdbc.ResultSet;
 import com.google.protos.cloud.sql.Client.SqlException;
@@ -60,6 +62,7 @@ public class kysymys_Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		PrintWriter out = response.getWriter();
 		String kysymys = request.getParameter("kysymys_add");
 		
 		try {
@@ -72,10 +75,16 @@ public class kysymys_Servlet extends HttpServlet {
 			
 			st.executeUpdate("INSERT INTO kysymykset (kysymys) VALUES ('"+kysymys+"')");
 
+			//POP-UP window
+			out.println("<script type=\"text/javascript\">");  
+			out.println("alert('Kysymys lisatty, siirryt‰‰n poisto/kysymys sivulle.');");  
+			out.println("</script>");
+			
 			conn.close();
 			
 			RequestDispatcher reqdisp = request.getRequestDispatcher("/Kysymys_poisto");
 			reqdisp.forward(request, response);
+			
 		}catch (Exception e) {
 			System.err.println("Got an exception!");
 			System.err.println(e.getMessage());
