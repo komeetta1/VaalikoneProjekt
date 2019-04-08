@@ -35,13 +35,13 @@ input {
 
 		<br>
 		
-		<form action = "/Kysymys_poisto" method = "GET">
+		<form action = "/Kysymys_poisto">
 			
 			<input type="submit" value="Siirry kysymyksien poistoon"
 				name="btnPoista" />
 		</form>
 		
-		<form action = "index.html" method = "GET">
+		<form action = "index.html">
 			
 			<input type="submit" value="Siirry etusivulle"
 				name="btnEtusivu" />

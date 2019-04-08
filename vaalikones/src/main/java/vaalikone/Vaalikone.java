@@ -120,6 +120,7 @@ public class Vaalikone extends HttpServlet {
                     //Hae haluttu kysymys tietokannasta
                     Query q = em.createQuery(
                             "SELECT k FROM Kysymykset k WHERE k.kysymysId=?1");
+                    		
                     q.setParameter(1, kysymys_id);
                     //Lue haluttu kysymys listaan
                     List<Kysymykset> kysymysList = q.getResultList();
