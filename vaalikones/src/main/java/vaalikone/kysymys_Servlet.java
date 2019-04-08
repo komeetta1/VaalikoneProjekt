@@ -23,7 +23,6 @@ import persist.Kysymykset;
 import com.*;
 import java.*;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -74,6 +73,8 @@ public class kysymys_Servlet extends HttpServlet {
 			st.executeUpdate("INSERT INTO kysymykset (kysymys) VALUES ('"+kysymys+"')");
 
 			conn.close();
+			RequestDispatcher reqdisp = request.getRequestDispatcher("/Kysymys_poisto");
+			reqdisp.forward(request, response);
 		}catch (Exception e) {
 			System.err.println("Got an exception!");
 			System.err.println(e.getMessage());
