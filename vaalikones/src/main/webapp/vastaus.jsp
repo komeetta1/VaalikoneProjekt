@@ -83,11 +83,11 @@
 		            
 		            List<Kysymykset> kysymykset = (List<Kysymykset>)request.getAttribute("kysymykset");
 					int size = 0;
-					size = kysymykset.size();
+					//size = kysymykset.size();
 					
 		            for (Kysymykset kysymys : kysymykset) { %>
 		            <div class="kysymys">
-		                <%= kysymys.getKysymysId() %> / 19 <%-- <%= size %>--%> <br>
+		                <%= kysymys.getKysymysId() %> / <%= request.getAttribute("kysymysLkm") %><br>
 		                <%= kysymys.getKysymys() %>
 		                 </div>
 		                <form action="Vaalikone" id="vastausformi">
