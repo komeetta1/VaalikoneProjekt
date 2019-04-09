@@ -76,9 +76,9 @@
 
 
 		<%
-					RequestDispatcher rd=request.getRequestDispatcher("KysymystenHaku");
+/* 					RequestDispatcher rd=request.getRequestDispatcher("KysymystenHaku");
 					rd.include(request, response);
-		 
+ */		 
 		            @SuppressWarnings("unchecked")
 		            
 		            List<Kysymykset> kysymykset = (List<Kysymykset>)request.getAttribute("kysymykset");

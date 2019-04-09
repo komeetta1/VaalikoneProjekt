@@ -116,12 +116,13 @@ public class Vaalikone extends HttpServlet {
                 try {
                     //Hae haluttu kysymys tietokannasta
                     Query q = em.createQuery(
-                            "SELECT k FROM Kysymykset k WHERE k.kysymysId=?1");
+                            "SELECT k FROM Kysymykset k WHERE k.kysymysId>=?1");
                     		
                     q.setParameter(1, kysymys_id);
                     //Lue haluttu kysymys listaan
                     List<Kysymykset> kysymysList = q.getResultList();
-                    request.setAttribute("kysymykset", kysymysList);
+                    List<Kysymykset> tadaa=kysymysList.subList(0, 1);
+                    request.setAttribute("kysymykset", tadaa);
                     request.getRequestDispatcher("/vastaus.jsp")
                             .forward(request, response);
 
