@@ -29,7 +29,7 @@
 			alt="" />
 
 
-		<%
+		<%-- <%
 			@SuppressWarnings("unchecked")
 			List<Kysymykset> kysymykset = (List<Kysymykset>) request.getAttribute("kysymykset");
 			for (Kysymykset kysymys : kysymykset) {
@@ -72,10 +72,10 @@
 		</div>
 		<%
 			}
-		%>
+		%> --%>
 
 
-		<%-- <%
+		<%
 					RequestDispatcher rd=request.getRequestDispatcher("KysymystenHaku");
 					rd.include(request, response);
 		 
@@ -87,7 +87,7 @@
 					
 		            for (Kysymykset kysymys : kysymykset) { %>
 		            <div class="kysymys">
-		                <%= kysymys.getKysymysId() %> / <%= size %> <br>
+		                <%= kysymys.getKysymysId() %> / 19 <%-- <%= size %>--%> <br>
 		                <%= kysymys.getKysymys() %>
 		                 </div>
 		                <form action="Vaalikone" id="vastausformi">
@@ -102,7 +102,7 @@
 		                    <div class="kysymys"><small>1=Täysin eri mieltä 2=Osittain eri mieltä 3=En osaa sanoa, 4=Osittain samaa mieltä 5=Täysin samaa mieltä</small></div>
 		                <%
 		            } 
-		        %> --%>
+		        %>
 
 
 
