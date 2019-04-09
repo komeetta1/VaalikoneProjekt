@@ -29,16 +29,13 @@
 			<h3>Kysymyksiin vastaaminen</h3>
 		</div>
 		<br>
-		<form action="Vastaa">
+		<form action="/vastaustenLisays" method="GET">
 			<select name="vastaaja">
-				<!-- Tähän kai pitäisi tehdä java-looppi joka lukee ehdokkaan IDn ja nimen
-				ja tulostaa ne oikein optioniksi, kuten alla: -->
-				<%
+				<% /** Looppi, joka käy tietokannasta saadut ehdokkaat läpi ja tulostaa ne dropdown-listaan*/
 					for(Ehdokkaat ehdokas : ehdokkaat) {%>
-						<option value=<%ehdokas.getEhdokasId();%>><%=ehdokas.getEhdokasId() %> - <%=ehdokas.getEtunimi() %>  <%=ehdokas.getSukunimi() %> - <%=ehdokas.getPuolue() %></option>
+						<option value="<%=ehdokas.getEhdokasId()%>"><%=ehdokas.getEhdokasId() %> - <%=ehdokas.getEtunimi() %>  <%=ehdokas.getSukunimi() %> - <%=ehdokas.getPuolue() %></option>
 					<%}
 				%>
-				
 			</select>
 		<p>Tähän listataan kysymykset</p>
 		
@@ -50,26 +47,29 @@
 			return;
 		}
 		%>
-		<table id=vastaustaulu>
-		
-		<%for (Kysymykset kysymys : kysymykset) {
+		<table name=vastaustaulu>
+		<%
+		/**Looppaa tietokannasta saadut kysymykset läpi, ja asettaa ne sopivaan HTML taulukkoon*/
+		for (Kysymykset kysymys : kysymykset) {%>
+			<%
 			// tulostaa kysymykset konsoliin, lähinnä debuggausta varten
 			// System.out.println(kysymys);%>
 			<tr>
+				<input type="hidden" name="kysymysnro" value="<%=kysymys.getKysymysId()%>">
 				<td>Kysymys nro. <%= kysymys.getKysymysId() %></td>
 				<td><%= kysymys.getKysymys() %></td>
+				</div>
 			</tr>
 			<tr>
 					<td>
-                    <label>1</label><input type="radio" name="vastaus" value="1" /><small>Täysin eri mieltä</small><br>
-                    <label>2</label><input type="radio" name="vastaus" value="2" /><small>Osittain eri mieltä</small><br>
-                    <label>3</label><input type="radio" name="vastaus" value="3" checked="checked" /><small>En osaa sanoa</small><br>
-                    <label>4</label><input type="radio" name="vastaus" value="4" /><small>Osittain samaa mieltä</small><br>
-                    <label>5</label><input type="radio" name="vastaus" value="5" /><small>Täysin samaa mieltä</small><br>
+                    <label>1</label><input type="radio" name="vastaus[<%= kysymys.getKysymysId() %>]" value="1" /><small>Täysin eri mieltä</small><br>
+                    <label>2</label><input type="radio" name="vastaus[<%= kysymys.getKysymysId() %>]" value="2" /><small>Osittain eri mieltä</small><br>
+                    <label>3</label><input type="radio" name="vastaus[<%= kysymys.getKysymysId() %>]" value="3" checked="checked" /><small>En osaa sanoa</small><br>
+                    <label>4</label><input type="radio" name="vastaus[<%= kysymys.getKysymysId() %>]" value="4" /><small>Osittain samaa mieltä</small><br>
+                    <label>5</label><input type="radio" name="vastaus[<%= kysymys.getKysymysId() %>]" value="5" /><small>Täysin samaa mieltä</small><br>
                   	</td>
-                  	
-                  	<td><p><small>Kirjoita tähän perustelut vastaukselle (max. 100 merkkiä)</small></p>
-                  	<textarea name="perusteluBox" cols="50" rows="5"></textarea>
+                  	<td>
+                  	<textarea name="perusteluBox[<%=kysymys.getKysymysId() %>]" cols="50" rows="5" maxlength="100" placeholder="Perustelut vastaukselle (max. 100 merkkiä)">ESIMERKKIVASTAUS</textarea>
                   	</td>
 			</tr>
 			<tr>
@@ -78,7 +78,7 @@
 			
 		<%}%>
 		</table>
-		<input id="submitnappi" type="submit" value="vastaa" name="btnEhVastaa" />
+		<input id="submitnappi" type="submit" value="vastaa" name="btnEhVastaa" a href ='/vastaustenLisays'/>
 		</div>
 		
 				
