@@ -5,13 +5,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import java.sql.Statement;
+import java.util.List;
 import java.sql.ResultSet;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import persist.Ehdokkaat;
 
 /**
  * Servlet implementation class Kysymys_poisto_handler
@@ -51,7 +58,7 @@ public class Kysymys_poisto_handler extends HttpServlet {
 		try {
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaalikone", "pena", "kukkuu");
 			Statement stmt = con.createStatement();
-			String sql = "DELETE FROM kysymykset WHERE kysymys_id = '?'";
+			//String sql = "DELETE FROM kysymykset WHERE kysymys_id = '?'";
 
 			stmt.executeUpdate(("DELETE FROM kysymykset WHERE kysymys_id = \"" + poista + "\""));
 			response.sendRedirect(request.getContextPath() + "/Kysymys_poisto");

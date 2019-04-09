@@ -77,7 +77,7 @@ public class kysymys_Servlet extends HttpServlet {
 
 			//POP-UP window
 			out.println("<script type=\"text/javascript\">");  
-			out.println("alert('Kysymys lisatty, siirryt‰‰n poisto/kysymys sivulle.');");  
+			out.println("alert('Siirryt‰‰n kysymysten hallintaan.');");  
 			out.println("</script>");
 			
 			conn.close();

@@ -71,13 +71,25 @@ public class Kysymys_poisto extends HttpServlet {
 				out.println("<br>");
 			}
 			
+			// POISTO
 			out.println("<form action='Kysymys_poisto_handler' method='POST'/>");
-			out.println("<p>Syötä poistettavan kysymyksen ID</p>");
-			out.println("<input type='text' name='poista'</input>");	
-			out.println("<input type='submit' value='Poista kysymys'</input>");
+			out.println("<p>Poista kysymys</p>");
+			out.println("<input type='text' name='poista' placeholder='ID' size='3' maxlength='3'</input>");	
+			out.println("<input type='submit' value='Poista' style=color:red;'</input>");
 			out.println("</form>");
+			
+			
+			// MUOKKAUS 
+			out.println("<form action='Kysymys_muokkaus' method='POST'/>");
+			out.println("<p>Kirjoita uudestaan / muokkaa kysymystä</p>");
+			out.println("<input type='text' name='id' size='3' maxlength='3' placeholder='ID'</input>");
+			out.println("<input type='text' name='muokkaa' size='100' placeholder='Kirjoita uusi kysymys'</input>");	
+			out.println("<input type='submit' value='Muokkaa' style=color:green;'</input>");
+			out.println("</form>");
+			
+			// PALAA
 			out.println("<form action='uusi_kysymys.jsp' method='POST'/>");
-			out.println("<input type='submit' value='Palaa' name='palaabtn'</input>");
+			out.println("<input type='submit' value='Palaa kysymyksen lisäykseen' name='palaabtn'</input>");
 			out.println("</form>");
 			
 			st.close();
