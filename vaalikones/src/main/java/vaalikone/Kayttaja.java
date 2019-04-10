@@ -47,19 +47,6 @@ public class Kayttaja implements Serializable {
 	public int LongToInt() {
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
-		emf = Persistence.createEntityManagerFactory("vaalikones");
-		em = emf.createEntityManager();
-    
-        Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
-		List listlkm = lkm.getResultList();
-		Long lukumaara = (Long) (listlkm.get(0));
-		int a = lukumaara != null ? lukumaara.intValue():null;
-		return a;
-	}
-	
-
-		EntityManagerFactory emf = null;
-		EntityManager em = null;
 		try {
 
 			emf = Persistence.createEntityManagerFactory("vaalikones");
