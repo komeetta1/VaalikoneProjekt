@@ -110,19 +110,70 @@ public class Vaalikone extends HttpServlet {
                 //määritä seuraavaksi haettava kysymys
                 kysymys_id++;
             }
+            
+            Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
+        	List ll=lkm.getResultList();
+        	Long lukumaara=(Long)(ll.get(0));
 
             //jos kysymyksiä on vielä jäljellä, hae seuraava
-            if (kysymys_id < 20) {
+            if (kysymys_id < lukumaara) {
                 try {
+                	
                     //Hae haluttu kysymys tietokannasta
                     Query q = em.createQuery(
-                            "SELECT k FROM Kysymykset k WHERE k.kysymysId=?1");
+                            "SELECT k FROM Kysymykset k WHERE k.kysymysId>=?1");
+                    		
                     q.setParameter(1, kysymys_id);
                     //Lue haluttu kysymys listaan
                     List<Kysymykset> kysymysList = q.getResultList();
-                    request.setAttribute("kysymykset", kysymysList);
-                    request.getRequestDispatcher("/vastaus.jsp")
-                            .forward(request, response);
+                    if(kysymysList != null && !kysymysList.isEmpty()) {
+
+                        List<Kysymykset> tadaa=kysymysList.subList(0, 1);
+                        request.setAttribute("kysymykset", tadaa);
+                        request.setAttribute("kysymysLkm", lukumaara);
+                        request.getRequestDispatcher("/vastaus.jsp")
+                                .forward(request, response);
+                    } else {
+
+                        //Tyhjennetään piste-array jotta pisteet eivät tuplaannu mahdollisen refreshin tapahtuessa
+                        for (int i = 0; i < 20; i++) {
+                            usr.pisteet.set(i, new Tuple<>(0, 0));
+                        }
+
+                        //Hae lista ehdokkaista
+                        Query qE = em.createQuery(
+                                "SELECT e.ehdokasId FROM Ehdokkaat e"
+                        );
+                        List<Integer> ehdokasList = qE.getResultList();
+
+                        //iteroi ehdokaslista läpi
+                        for (int i = 1; i < ehdokasList.size(); i++) {
+
+                            //Hae lista ehdokkaiden vastauksista
+                            Query qV = em.createQuery(
+                                    "SELECT v FROM Vastaukset v WHERE v.vastauksetPK.ehdokasId=?1");
+                            qV.setParameter(1, i);
+                            List<Vastaukset> vastausList = qV.getResultList();
+
+                            //iteroi vastauslista läpi
+                            for (Vastaukset eVastaus : vastausList) {
+                                int pisteet;
+
+                                //hae käyttäjän ehdokaskohtaiset pisteet
+                                pisteet = usr.getPisteet(i);
+
+                                //laske oman ja ehdokkaan vastauksen perusteella pisteet 
+                                pisteet += laskePisteet(usr.getVastaus(i), eVastaus.getVastaus());
+
+                                logger.log(Level.INFO, "eID: {0} / k: {1} / kV: {2} / eV: {3} / p: {4}", new Object[]{i, eVastaus.getVastauksetPK().getKysymysId(), usr.getVastaus(i), eVastaus.getVastaus(), pisteet});
+                                usr.addPisteet(i, pisteet);
+                            }
+
+                        }
+
+                        //siirrytään hakemaan paras ehdokas
+                        strFunc = "haeEhdokas";
+                    }
 
                 } finally {
                     // Sulje tietokantayhteys
@@ -133,46 +184,6 @@ public class Vaalikone extends HttpServlet {
                 }
 
                 //jos kysymykset loppuvat, lasketaan tulos!
-            } else {
-
-                //Tyhjennetään piste-array jotta pisteet eivät tuplaannu mahdollisen refreshin tapahtuessa
-                for (int i = 0; i < 20; i++) {
-                    usr.pisteet.set(i, new Tuple<>(0, 0));
-                }
-
-                //Hae lista ehdokkaista
-                Query qE = em.createQuery(
-                        "SELECT e.ehdokasId FROM Ehdokkaat e"
-                );
-                List<Integer> ehdokasList = qE.getResultList();
-
-                //iteroi ehdokaslista läpi
-                for (int i = 1; i < ehdokasList.size(); i++) {
-
-                    //Hae lista ehdokkaiden vastauksista
-                    Query qV = em.createQuery(
-                            "SELECT v FROM Vastaukset v WHERE v.vastauksetPK.ehdokasId=?1");
-                    qV.setParameter(1, i);
-                    List<Vastaukset> vastausList = qV.getResultList();
-
-                    //iteroi vastauslista läpi
-                    for (Vastaukset eVastaus : vastausList) {
-                        int pisteet;
-
-                        //hae käyttäjän ehdokaskohtaiset pisteet
-                        pisteet = usr.getPisteet(i);
-
-                        //laske oman ja ehdokkaan vastauksen perusteella pisteet 
-                        pisteet += laskePisteet(usr.getVastaus(i), eVastaus.getVastaus());
-
-                        logger.log(Level.INFO, "eID: {0} / k: {1} / kV: {2} / eV: {3} / p: {4}", new Object[]{i, eVastaus.getVastauksetPK().getKysymysId(), usr.getVastaus(i), eVastaus.getVastaus(), pisteet});
-                        usr.addPisteet(i, pisteet);
-                    }
-
-                }
-
-                //siirrytään hakemaan paras ehdokas
-                strFunc = "haeEhdokas";
             }
 
         }

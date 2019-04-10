@@ -55,7 +55,7 @@ public class EhdokkaidenHaku extends HttpServlet {
 		
 	}
 
-	//Hae ehdokas ID:llä ja tulosta se
+	//Hae ehdokas ID:llï¿½ ja tulosta se
 	public Ehdokkaat haeEhdokas(int ehdokas_ID) {
 	
         EntityManagerFactory emf=null;
