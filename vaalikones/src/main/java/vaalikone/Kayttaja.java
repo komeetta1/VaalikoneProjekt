@@ -14,9 +14,16 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.servlet.RequestDispatcher;
+
+import org.apache.taglibs.standard.tag.common.core.CatchTag;
 
 import vaalikone.Tuple;
+import persist.*;
 
 /**
  *
@@ -32,11 +39,31 @@ public class Kayttaja implements Serializable {
 //	private static final long serialVersionUID = 3262098698622771486L;
 	/**
 	 * 
-	 */
+//	 */
+	public int longtoint() {
+
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		try {
+
+			emf = Persistence.createEntityManagerFactory("vaalikones");
+			em = emf.createEntityManager();
+			Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
+			List listlkm = lkm.getResultList();
+			Long lukumaara = (Long) (listlkm.get(0));
+			int a = lukumaara != null ? lukumaara.intValue() : null;
+			//int s =(int)(long)lukumaara;
+			return a;
+		}catch(Exception e) {
+			return 0;
+		}
+	}
+	
+
 
 //	private final ArrayList<Integer> vastaus = new ArrayList<>(20);
-	private ArrayList<Integer> vastaus = new ArrayList<>();
-	ArrayList<Tuple<Integer, Integer>> pisteet = new ArrayList<>();
+	private ArrayList<Integer> vastaus = new ArrayList<>(longtoint());
+	ArrayList<Tuple<Integer, Integer>> pisteet = new ArrayList<>(longtoint());
 //    private final static Logger logger = Logger.getLogger(Loki.class.getName());
 
 	/**
@@ -56,7 +83,7 @@ public class Kayttaja implements Serializable {
 
 		// täytelläänhän listat valmiiksi
 //		for (int i = 0; i < 20; i++) {
-		for (int i = 0; i <= magicNumber; i++) {
+		for (int i = 0; i <= longtoint(); i++) {
 			this.vastaus.add(0);
 			this.pisteet.add(new Tuple<>(0, 0));
 		}
@@ -147,7 +174,6 @@ public class Kayttaja implements Serializable {
 	};
 
 	public void setMagicNumber(Long lukumaara) {
-		// TODO Auto-generated method stub
 		magicNumber=lukumaara+1;
 		
 	}

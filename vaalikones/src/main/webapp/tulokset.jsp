@@ -69,7 +69,7 @@
             <h2>Mitä asioita haluat edistää?</h2>
             <p><%= seParasEhdokas.getMitaAsioitaHaluatEdistaa()%></p>
 
-            <% 
+            <% }
                 
                 for (int i = 0; i < parhaanEhdokkaanVastaukset.size(); i++) {
             %>
