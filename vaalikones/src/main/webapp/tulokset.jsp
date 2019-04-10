@@ -54,7 +54,13 @@
             <p><%= seParasEhdokas.getMitaAsioitaHaluatEdistaa()%></p>
 
             <% }
-
+                if(kaikkiKysymykset == null || kaikkiKysymykset.size()==0){
+                	System.out.println("asdasd");
+                }
+                else{
+                	System.out.println("kaikkiKysymykset koko="+kaikkiKysymykset.size());
+                }
+                
                 for (int i = 0; i < parhaanEhdokkaanVastaukset.size(); i++) {
             %>
             <b>Kysymys <%= i + 1%>: <%= kaikkiKysymykset.get(i).getKysymys()%></b><br>
