@@ -16,6 +16,9 @@
 		RequestDispatcher rdKH=request.getRequestDispatcher("KysymystenHaku");
 		rdKH.include(request, response);
 		List<Kysymykset> kysymykset = (List<Kysymykset>)request.getAttribute("kaikkiKysymykset");
+		int kysymysmaara = kysymykset.size();
+		String vastauslista[] = new String[kysymysmaara];
+		String perusteluBoxlista[] = new String[kysymysmaara];
 		
 		RequestDispatcher rdEH=request.getRequestDispatcher("EhdokkaidenHaku");
 		rdEH.include(request, response);
@@ -62,20 +65,20 @@
 			</tr>
 			<tr>
 					<td>
-                    <label>1</label><input type="radio" name="vastaus[<%= kysymys.getKysymysId() %>]" value="1" /><small>Täysin eri mieltä</small><br>
-                    <label>2</label><input type="radio" name="vastaus[<%= kysymys.getKysymysId() %>]" value="2" /><small>Osittain eri mieltä</small><br>
-                    <label>3</label><input type="radio" name="vastaus[<%= kysymys.getKysymysId() %>]" value="3" checked="checked" /><small>En osaa sanoa</small><br>
-                    <label>4</label><input type="radio" name="vastaus[<%= kysymys.getKysymysId() %>]" value="4" /><small>Osittain samaa mieltä</small><br>
-                    <label>5</label><input type="radio" name="vastaus[<%= kysymys.getKysymysId() %>]" value="5" /><small>Täysin samaa mieltä</small><br>
+                    <label>1</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="1" /><small>Täysin eri mieltä</small><br>
+                    <label>2</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="2" /><small>Osittain eri mieltä</small><br>
+                    <label>3</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="3" checked="checked" /><small>En osaa sanoa</small><br>
+                    <label>4</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="4" /><small>Osittain samaa mieltä</small><br>
+                    <label>5</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="5" /><small>Täysin samaa mieltä</small><br>
                   	</td>
                   	<td>
-                  	<textarea name="perusteluBox[<%=kysymys.getKysymysId() %>]" cols="50" rows="5" maxlength="100" placeholder="Perustelut vastaukselle (max. 100 merkkiä)">ESIMERKKIVASTAUS</textarea>
+                  	<textarea name="perusteluBox<%=kysymys.getKysymysId()%>" cols="50" rows="5" maxlength="100" placeholder="Perustelut vastaukselle (max. 100 merkkiä)">ESIMERKKIVASTAUS</textarea>
                   	</td>
 			</tr>
 			<tr>
 			<td><hr></td>
 			</tr>
-			
+
 		<%}%>
 		</table>
 		<input id="submitnappi" type="submit" value="vastaa" name="btnEhVastaa" a href ='/vastaustenLisays'/>
