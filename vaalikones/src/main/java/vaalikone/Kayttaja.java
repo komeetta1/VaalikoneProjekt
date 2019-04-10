@@ -31,16 +31,32 @@ import persist.*;
  */
 public class Kayttaja implements Serializable {
 
-	
-	Long magicNumber=0L;
+	//Long magicNumber=0L;
 	/**
 	 * 
 	 */
+	
+	
 //	private static final long serialVersionUID = 3262098698622771486L;
 	/**
+	 * @return 
 	 * 
-//	 */
-	public int longtoint() {
+	 */
+	
+	
+	public int LongToInt() {
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		emf = Persistence.createEntityManagerFactory("vaalikones");
+		em = emf.createEntityManager();
+    
+        Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
+		List listlkm = lkm.getResultList();
+		Long lukumaara = (Long) (listlkm.get(0));
+		int a = lukumaara != null ? lukumaara.intValue():null;
+		return a;
+	}
+	
 
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
@@ -62,8 +78,8 @@ public class Kayttaja implements Serializable {
 
 
 //	private final ArrayList<Integer> vastaus = new ArrayList<>(20);
-	private ArrayList<Integer> vastaus = new ArrayList<>(longtoint());
-	ArrayList<Tuple<Integer, Integer>> pisteet = new ArrayList<>(longtoint());
+	private ArrayList<Integer> vastaus = new ArrayList<>(LongToInt());
+	ArrayList<Tuple<Integer, Integer>> pisteet = new ArrayList<>(LongToInt());
 //    private final static Logger logger = Logger.getLogger(Loki.class.getName());
 
 	/**
@@ -78,12 +94,14 @@ public class Kayttaja implements Serializable {
 //        }
 //
 //    }
+	
+	
 
 	public void taytaVastauksetJaPisteet() {
 
 		// täytelläänhän listat valmiiksi
 //		for (int i = 0; i < 20; i++) {
-		for (int i = 0; i <= longtoint(); i++) {
+		for (int i = 0; i <= LongToInt(); i++) {
 			this.vastaus.add(0);
 			this.pisteet.add(new Tuple<>(0, 0));
 		}
@@ -173,9 +191,11 @@ public class Kayttaja implements Serializable {
 		}
 	};
 
-	public void setMagicNumber(Long lukumaara) {
-		magicNumber=lukumaara+1;
-		
-	}
-
+//	public void setMagicNumber(Long lukumaara) {
+//		// TODO Auto-generated method stub
+//		magicNumber=lukumaara+1;
+//		
+//	}
 }
+
+

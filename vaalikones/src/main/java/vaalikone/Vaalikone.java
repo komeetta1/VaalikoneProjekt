@@ -84,8 +84,9 @@ public class Vaalikone extends HttpServlet {
 		Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
 		List listlkm = lkm.getResultList();
 		Long lukumaara = (Long) (listlkm.get(0));
-		usr.setMagicNumber(lukumaara);
-
+		/*
+		//usr.setMagicNumber(lukumaara);
+		*/
 		// hae url-parametri func joka määrittää toiminnon mitä halutaan tehdä.
 		// func=haeEhdokas: hae tietyn ehdokkaan tiedot ja vertaile niitä käyttäjän
 		// vastauksiin
