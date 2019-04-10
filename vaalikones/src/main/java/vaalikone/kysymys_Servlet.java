@@ -75,7 +75,7 @@ public class kysymys_Servlet extends HttpServlet {
 			
 			st.executeUpdate("INSERT INTO kysymykset (kysymys) VALUES ('"+kysymys+"')");
 
-			//POP-UP window
+//			POP-UP window
 			out.println("<script type=\"text/javascript\">");  
 			out.println("alert('Siirryt‰‰n kysymysten hallintaan.');");  
 			out.println("</script>");

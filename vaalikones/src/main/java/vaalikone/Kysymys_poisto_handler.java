@@ -61,6 +61,7 @@ public class Kysymys_poisto_handler extends HttpServlet {
 			//String sql = "DELETE FROM kysymykset WHERE kysymys_id = '?'";
 
 			stmt.executeUpdate(("DELETE FROM kysymykset WHERE kysymys_id = \"" + poista + "\""));
+			stmt.executeUpdate(("DELETE FROM vastaukset WHERE kysymys_id = \"" + poista + "\""));
 			response.sendRedirect(request.getContextPath() + "/Kysymys_poisto");
 			System.out.println("Kysymys poistettu.");
 		} catch (Exception e) {
