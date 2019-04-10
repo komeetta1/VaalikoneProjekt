@@ -24,6 +24,8 @@ import vaalikone.Tuple;
  */
 public class Kayttaja implements Serializable {
 
+	
+	Long magicNumber=0L;
 	/**
 	 * 
 	 */
@@ -33,8 +35,8 @@ public class Kayttaja implements Serializable {
 	 */
 
 //	private final ArrayList<Integer> vastaus = new ArrayList<>(20);
-	private ArrayList<Integer> vastaus = new ArrayList<>(20);
-	ArrayList<Tuple<Integer, Integer>> pisteet = new ArrayList<>(20);
+	private ArrayList<Integer> vastaus = new ArrayList<>();
+	ArrayList<Tuple<Integer, Integer>> pisteet = new ArrayList<>();
 //    private final static Logger logger = Logger.getLogger(Loki.class.getName());
 
 	/**
@@ -53,7 +55,8 @@ public class Kayttaja implements Serializable {
 	public void taytaVastauksetJaPisteet() {
 
 		// täytelläänhän listat valmiiksi
-		for (int i = 0; i < 20; i++) {
+//		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i <= magicNumber; i++) {
 			this.vastaus.add(0);
 			this.pisteet.add(new Tuple<>(0, 0));
 		}
@@ -142,5 +145,11 @@ public class Kayttaja implements Serializable {
 			return o1.pisteet.compareTo(o2.pisteet);
 		}
 	};
+
+	public void setMagicNumber(Long lukumaara) {
+		// TODO Auto-generated method stub
+		magicNumber=lukumaara+1;
+		
+	}
 
 }
