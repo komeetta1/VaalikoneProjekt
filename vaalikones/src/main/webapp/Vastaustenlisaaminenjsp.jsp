@@ -17,8 +17,6 @@
 		rdKH.include(request, response);
 		List<Kysymykset> kysymykset = (List<Kysymykset>)request.getAttribute("kaikkiKysymykset");
 		int kysymysmaara = kysymykset.size();
-		String vastauslista[] = new String[kysymysmaara];
-		String perusteluBoxlista[] = new String[kysymysmaara];
 		
 		RequestDispatcher rdEH=request.getRequestDispatcher("EhdokkaidenHaku");
 		rdEH.include(request, response);
@@ -58,7 +56,7 @@
 			// tulostaa kysymykset konsoliin, lähinnä debuggausta varten
 			// System.out.println(kysymys);%>
 			<tr>
-				<input type="hidden" name="kysymysnro" value="<%=kysymys.getKysymysId()%>">
+				<input type="hidden" name="kysymysnro<%=kysymys.getKysymysId()%>" value="<%=kysymys.getKysymysId()%>">
 				<td>Kysymys nro. <%= kysymys.getKysymysId() %></td>
 				<td><%= kysymys.getKysymys() %></td>
 				</div>

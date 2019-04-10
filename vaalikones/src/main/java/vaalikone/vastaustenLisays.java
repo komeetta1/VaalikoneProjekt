@@ -43,11 +43,14 @@ public class vastaustenLisays extends HttpServlet {
 		int lkm=kaikkiKysymykset.size();
 		String[] vastaus=new String[lkm];
 		String[] perustelu=new String[lkm];
+		String[] kysymysnro=new String[lkm];
 
 		for (int i=0;i<lkm;i++) {
 			Kysymykset k=kaikkiKysymykset.get(i);
+			kysymysnro[i]=request.getParameter("kysymysnro"+k.getKysymysId());
 			vastaus[i]=request.getParameter("vastaus"+k.getKysymysId());
 			perustelu[i]=request.getParameter("perusteluBox"+k.getKysymysId());
+
 		}
 		
 		String vastaaja;
@@ -58,10 +61,10 @@ public class vastaustenLisays extends HttpServlet {
 		// TRY blokki
 		try {
 			vastaaja = request.getParameter("vastaaja");
-			kysymysSTR = request.getParameter("kysymysnro");
+			//kysymysSTR = request.getParameter("kysymysnro");
 		} catch (Exception e) {
 			vastaaja = null;
-			kysymysSTR = null;
+			//kysymysSTR = null;
 			vastaus = null;
 			perustelu = null;
 		} 
@@ -70,17 +73,16 @@ public class vastaustenLisays extends HttpServlet {
 		
 		// Debuggausta varten kirjoittaa konsoliin asioita
 		System.out.println("Vastaaja oli: "+vastaaja);
-		System.out.println("Kysymys oli: "+kysymysSTR);
-		System.out.println(kysymysmaara);
+		//System.out.println("Kysymys oli: "+kysymysSTR);
+		System.out.println("Kysymyksiä kannassa: "+lkm);
 		
-		for (String H : vastaus) {
-			System.out.println("Vastaus kysymykseen nro."+kysymysSTR+" on: "+H);
-			//System.out.println("Perustelut: "+);
+		for (int i=0; i<lkm;i++) {
+			System.out.print("Vastaus kysymykseen: "+kysymysnro[i]);
+			System.out.println(" on: "+vastaus[i]);
+			System.out.println("Ja perustelut: "+perustelu[i]+"\n");
 		}
 		
-		//System.out.println("Vastaus kysymykseen: "+vastaus[]);
-		//System.out.println("Perustelu vastaukseen: "+perustelu[kysymys]);
-		
+		// Tulostaa selaimeen tekstiä merkkinä että virheitä ei esiintynyt:
 		response.getWriter().println(" ! KABOOM YEAH !");
 	}
 	
