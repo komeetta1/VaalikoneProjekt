@@ -19,7 +19,8 @@ import persist.Vastaukset;
 /**
  * Servlet implementation class vastaustenLisays
  */
-@WebServlet(description = "Lisää vastauksen tietokantaan", 
+@WebServlet(name= "vastaustenLisays",
+		description = "Lisää vastauksen tietokantaan", 
 			urlPatterns = { "/vastaustenLisays" })
 public class vastaustenLisays extends HttpServlet {
 	
@@ -31,10 +32,38 @@ public class vastaustenLisays extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub	
+		// Vastaustenlisaaminenjsp:ltä saatuja vastauksen parametrejä:
+		// MALLI: request.getParameter("parametrin nimi");
+		
+		
+		
+		String vastaaja;
+		String kysymysSTR;
+		String[] vastaus;
+		String[] perustelu;
+		
+		// TRY blokki
+		try {
+			vastaaja = request.getParameter("vastaaja");
+			kysymysSTR = request.getParameter("kysymysnro");
+			vastaus = request.getParameterValues("vastaus[]");
+			perustelu = request.getParameterValues("perusteluBox[]");
+		} catch (Exception e) {
+			vastaaja = null;
+			kysymysSTR = null;
+			vastaus = null;
+			perustelu = null;
+		}
+		
+		System.out.println("Vastaaja oli: "+vastaaja);
+		System.out.println("Kysymys oli: "+kysymysSTR);
+		//System.out.println("Vastaus kysymykseen: "+vastaus[]);
+		//System.out.println("Perustelu vastaukseen: "+perustelu[kysymys]);
+		
+		response.getWriter().println(" ! KABOOM YEAH !");
 	}
 	
-	public void lisaaVastaus(Vastaukset vastaus){
+	public void lisaaVastaus(Vastaukset kysymyksenvastaus){
         EntityManagerFactory emf=null;
         EntityManager em = null;
         try {
@@ -46,7 +75,8 @@ public class vastaustenLisays extends HttpServlet {
         }
 		
 		try {
-			em.persist(vastaus);
+			// KÄYTÄ em.merge !! Merge korvaa vanhan tiedon!
+			em.persist(kysymyksenvastaus);
 		} catch(EntityExistsException exe) {
 			// KIRJOITA TÄHÄN VIRHEILMOITUS TMS. !
 		}

@@ -1,10 +1,13 @@
 package vaalikone;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import persist.Ehdokkaat;
+import persist.Kysymykset;
 
 /**
  * Servlet implementation class EhdokkaidenHaku
@@ -32,11 +36,27 @@ public class EhdokkaidenHaku extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		processRequest(request, response);
+		
+		//Hae ehdokas ID:n perusteella
+		
+		//Tulosta ehdokkaat
+		
+//		for (Ehdokkaat g: haeEhdokkaatKaikki()) {
+//			out.println(g);
+//		}
+	}
+	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
+		List<Ehdokkaat> kaikkiEhdokkaat = haeEhdokkaatKaikki();
+        
+        //ohjaa tiedot tulosten esityssivulle
+        request.setAttribute("kaikkiEhdokkaat", kaikkiEhdokkaat);
+		
 	}
 
-	public void haeEhdokas(Ehdokkaat ehdokas) {
+	//Hae ehdokas ID:ll� ja tulosta se
+	public Ehdokkaat haeEhdokas(int ehdokas_ID) {
 	
         EntityManagerFactory emf=null;
         EntityManager em = null;
@@ -45,11 +65,38 @@ public class EhdokkaidenHaku extends HttpServlet {
   	      em = emf.createEntityManager();
         }
         catch(Exception e) {
-          	return;
-          	
+          	return null;         	
         }
-        try {
-        	em.persist(ehdokas);
-        } catch(EntityExistException exe)
-	}
+        Ehdokkaat ehdokas = em.find(Ehdokkaat.class,  ehdokas_ID);
+        if (ehdokas !=null) {
+        
+        	return ehdokas;
+        } else {
+        	return null;
+        }
+	} 	
+		
+	//Hae ehdokkaat-taulun tiedot ja palauta ne listana
+    public List<Ehdokkaat> haeEhdokkaatKaikki() {
+    	EntityManagerFactory emf =null;
+    	EntityManager em = null;
+    	try {
+    		emf=Persistence.createEntityManagerFactory("vaalikones");
+    		em = emf.createEntityManager();
+    	}
+    	catch(Exception e) {
+    		return null;
+    	}
+    	
+    	try {
+    		Query q = em.createQuery("SELECT k FROM Ehdokkaat k");
+    		List<Ehdokkaat> ehdokasList = q.getResultList();
+    		return ehdokasList;
+    	}catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	return null;
+    	}
+    
+	
 }
