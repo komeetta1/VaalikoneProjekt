@@ -25,7 +25,7 @@
 <body>
 
 	<div id="container">
-		<img id="headerimg" src="images/Logo.png" width="500" height="144"
+		<img id="headerimg" src="Logo.png" width="500" height="144"
 			alt="" />
 
 
@@ -48,7 +48,8 @@
 		                    <input type="hidden" name="q" value="<%= kysymys.getKysymysId() %>">
 		                    <input type="submit" id="submitnappi" value="Vastaa" />
 		                </form>
-		                    <div class="kysymys"><small>1=Täysin eri mieltä 2=Osittain eri mieltä 3=En osaa sanoa, 4=Osittain samaa mieltä 5=Täysin samaa mieltä</small></div>
+		                    <div class="kysymys"><small> 1=Täysin eri mieltä <br> 2=Osittain eri mieltä 
+		                    <br> 3=En osaa sanoa <br> 4=Osittain samaa mieltä <br> 5=Täysin samaa mieltä</small></div>
 		                <%
 		            } 
 		        %>
