@@ -31,6 +31,7 @@ import persist.*;
  */
 public class Kayttaja implements Serializable {
 
+
 	//Long magicNumber=0L;
 	/**
 	 * 
@@ -184,3 +185,13 @@ public class Kayttaja implements Serializable {
 //		magicNumber=lukumaara+1;
 //		
 //	}
+
+=======
+//		// TODO Auto-generated method stub
+//		magicNumber=lukumaara+1;
+//		
+//	}
+>>>>>>> Jani
+}
+
+

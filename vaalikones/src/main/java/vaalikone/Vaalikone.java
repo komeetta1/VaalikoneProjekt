@@ -85,7 +85,6 @@ public class Vaalikone extends HttpServlet {
 		List listlkm = lkm.getResultList();
 		Long lukumaara = (Long) (listlkm.get(0));
 		//usr.setMagicNumber(lukumaara);
-
 		/*
 		//usr.setMagicNumber(lukumaara);
 		*/
