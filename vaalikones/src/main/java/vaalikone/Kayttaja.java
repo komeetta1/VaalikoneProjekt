@@ -32,7 +32,7 @@ import persist.*;
 public class Kayttaja implements Serializable {
 
 	
-	Long magicNumber=0L;
+	//Long magicNumber=0L;
 	/**
 	 * 
 	 */
@@ -173,9 +173,9 @@ public class Kayttaja implements Serializable {
 		}
 	};
 
-	public void setMagicNumber(Long lukumaara) {
-		magicNumber=lukumaara+1;
-		
-	}
+//	public void setMagicNumber(Long lukumaara) {
+//		magicNumber=lukumaara+1;
+//		
+//	}
 
 }
