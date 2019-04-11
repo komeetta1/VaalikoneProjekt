@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Shynet vaalikoneen vastausten lisï¿½ï¿½minen</title>
+<title>Shynet vaalikoneen vastausten lisääminen</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -32,13 +32,13 @@
 		<br>
 		<form action="/vastaustenLisays" method="GET">
 			<select name="vastaaja">
-				<% /** Looppi, joka kï¿½y tietokannasta saadut ehdokkaat lï¿½pi ja tulostaa ne dropdown-listaan*/
+				<% /** Looppi, joka käy tietokannasta saadut ehdokkaat lï¿½pi ja tulostaa ne dropdown-listaan*/
 					for(Ehdokkaat ehdokas : ehdokkaat) {%>
 						<option value="<%=ehdokas.getEhdokasId()%>"><%=ehdokas.getEhdokasId() %> - <%=ehdokas.getEtunimi() %>  <%=ehdokas.getSukunimi() %> - <%=ehdokas.getPuolue() %></option>
 					<%}
 				%>
 			</select>
-		<p>Tï¿½hï¿½n listataan kysymykset</p>
+		<p>Tähän listataan kysymykset</p>
 		
 
 		<div class=kysymys2>	
@@ -63,14 +63,14 @@
 			</tr>
 			<tr>
 					<td>
-                    <label>1</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="1" /><small>Tï¿½ysin eri mieltï¿½</small><br>
-                    <label>2</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="2" /><small>Osittain eri mieltï¿½</small><br>
+                    <label>1</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="1" /><small>Täysin eri mieltä</small><br>
+                    <label>2</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="2" /><small>Osittain eri mieltä</small><br>
                     <label>3</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="3" checked="checked" /><small>En osaa sanoa</small><br>
-                    <label>4</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="4" /><small>Osittain samaa mieltï¿½</small><br>
-                    <label>5</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="5" /><small>Tï¿½ysin samaa mieltï¿½</small><br>
+                    <label>4</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="4" /><small>Osittain samaa mieltä</small><br>
+                    <label>5</label><input type="radio" name="vastaus<%=kysymys.getKysymysId()%>" value="5" /><small>Täysin samaa mieltä</small><br>
                   	</td>
                   	<td>
-                  	<textarea name="perusteluBox<%=kysymys.getKysymysId()%>" cols="50" rows="5" maxlength="100" placeholder="Perustelut vastaukselle (max. 100 merkkiï¿½)">ESIMERKKIVASTAUS</textarea>
+                  	<textarea name="perusteluBox<%=kysymys.getKysymysId()%>" cols="50" rows="5" maxlength="100" placeholder="Perustelut vastaukselle (max. 100 merkkiä)"></textarea>
                   	</td>
 			</tr>
 			<tr>

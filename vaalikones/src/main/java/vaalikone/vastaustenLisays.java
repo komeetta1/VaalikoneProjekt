@@ -125,7 +125,7 @@ public class vastaustenLisays extends HttpServlet {
         
         em.getTransaction().begin();
 		try {
-			if (onvst == true) {
+			if (onvst = true) {
 				em.merge(kysymyksenvastaus);
 			} else {
 				em.persist(kysymyksenvastaus);
