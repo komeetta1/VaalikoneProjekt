@@ -41,7 +41,6 @@ public class kysymys_Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-
 		String lisaa = request.getParameter("lisaa");
 
 		Connection con = null;
