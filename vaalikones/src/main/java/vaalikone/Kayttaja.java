@@ -56,7 +56,6 @@ public class Kayttaja implements Serializable {
 			List listlkm = lkm.getResultList();
 			Long lukumaara = (Long) (listlkm.get(0));
 			int a = lukumaara != null ? lukumaara.intValue() : null;
-			//int s =(int)(long)lukumaara;
 			return a;
 		}catch(Exception e) {
 			return 0;
@@ -73,22 +72,12 @@ public class Kayttaja implements Serializable {
 	/**
 	 * Kayttaja-olioon tallennetaan vaalikoneen käyttäjän tietoja.
 	 */
-//    public Kayttaja() {
-//
-//        //täytelläänhän listat valmiiksi
-//        for (int i = 0; i < 20; i++) {
-//            this.vastaus.add(0);
-//            this.pisteet.add(new Tuple<>(0, 0));
-//        }
-//
-//    }
 	
 	
 
 	public void taytaVastauksetJaPisteet() {
 
 		// täytelläänhän listat valmiiksi
-//		for (int i = 0; i < 20; i++) {
 		for (int i = 0; i <= LongToInt(); i++) {
 			this.vastaus.add(0);
 			this.pisteet.add(new Tuple<>(0, 0));
@@ -181,12 +170,6 @@ public class Kayttaja implements Serializable {
 	};
 
 }
-
-//	public void setMagicNumber(Long lukumaara) {
-//		magicNumber=lukumaara+1;
-//		
-//	}
-
 //		// TODO Auto-generated method stub
 //		magicNumber=lukumaara+1;
 //		
