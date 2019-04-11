@@ -81,7 +81,6 @@
                 <li>Ehdokkaan kommentti: <%= parhaanEhdokkaanVastaukset.get(i).getKommentti()%></li>
             </ul>
 
-
             <%
                 }
 

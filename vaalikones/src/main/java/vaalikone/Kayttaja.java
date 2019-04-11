@@ -179,6 +179,7 @@ public class Kayttaja implements Serializable {
 			return o1.pisteet.compareTo(o2.pisteet);
 		}
 	};
+
 }
 
 //	public void setMagicNumber(Long lukumaara) {
@@ -186,12 +187,9 @@ public class Kayttaja implements Serializable {
 //		
 //	}
 
-=======
 //		// TODO Auto-generated method stub
 //		magicNumber=lukumaara+1;
 //		
 //	}
->>>>>>> Jani
-}
 
 

@@ -71,7 +71,7 @@ public class kysymys_Servlet extends HttpServlet {
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaalikone", "pena", "kukkuu");
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate(("INSERT INTO kysymykset (kysymys) VALUES ('"+lisaa+"')"));
+			stmt.executeUpdate("INSERT INTO kysymykset (kysymys) VALUES ('"+lisaa+"')");
 			response.sendRedirect(request.getContextPath() + "/Kysymys_poisto");
 		} catch (Exception e) {
 		} finally {
