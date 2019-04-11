@@ -83,8 +83,27 @@ public class vastaustenLisays extends HttpServlet {
 		}
 		
 		// Tulostaa selaimeen tekstiä merkkinä että virheitä ei esiintynyt:
-		response.getWriter().println(" ! KABOOM YEAH !");
+		//response.getWriter().println(" ! KABOOM YEAH !");
+		System.out.println("KABOOM YEAH, tavaraa meni kantaan, ehkä?");
+		
+		// Luodaan vastauksesta, siis yhden kysymyksen vastauksesta olio.
+		
+		VastauksetPK vastausolioPK = new VastauksetPK(Integer.parseInt(vastaaja),0);
+		Vastaukset vastausolio = new Vastaukset();
+		
+		for (int i=0; i<lkm;i++) {
+			vastausolioPK.setKysymysId(Integer.parseInt(kysymysnro[i]));
+			vastausolio.setVastauksetPK(vastausolioPK);
+			vastausolio.setVastaus(Integer.parseInt(vastaus[i]));
+			vastausolio.setKommentti(perustelu[i]);
+			
+			lisaaVastaus(vastausolio);
+		}
+		
 	}
+	
+	
+	
 	
 	public void lisaaVastaus(Vastaukset kysymyksenvastaus){
         EntityManagerFactory emf=null;
@@ -100,9 +119,21 @@ public class vastaustenLisays extends HttpServlet {
 		try {
 			// KÄYTÄ em.merge !! Merge korvaa vanhan tiedon!
 			em.persist(kysymyksenvastaus);
+			//em.merge(kysymyksenvastaus);
 		} catch(EntityExistsException exe) {
 			// KIRJOITA TÄHÄN VIRHEILMOITUS TMS. !
 		}
+		
+		try {
+			em.getTransaction().begin();
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+
 	}
 	
 }
