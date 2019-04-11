@@ -36,13 +36,14 @@
 	            Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
 	    		List listlkm = lkm.getResultList();
 	    		Long lukumaara = (Long) (listlkm.get(0));
+				int a = lukumaara != null ? lukumaara.intValue() : null;
             
                 List<Ehdokkaat> parhaatEhdokkaat = (List<Ehdokkaat>) request.getAttribute("parasEhdokas");
                 List<Integer> kayttajanVastaukset = (List<Integer>) request.getAttribute("kayttajanVastaukset");
                 List<Vastaukset> parhaanEhdokkaanVastaukset = (List<Vastaukset>) request.getAttribute("parhaanEhdokkaanVastaukset");
                 List<Kysymykset> kaikkiKysymykset = (List<Kysymykset>) request.getAttribute("kaikkiKysymykset");
                 Double pisteet = (double) (Integer) request.getAttribute("pisteet");
-                Double prosentit = (double) Math.round(pisteet / (3 * lukumaara) * 100);
+                Double prosentit = (double) Math.round(pisteet / (3 * a) * 100);
                 Integer jarjestysnumero = (Integer) request.getAttribute("jarjestysnumero");
 
                 if (jarjestysnumero > 0) {%>

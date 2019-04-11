@@ -39,6 +39,24 @@ import persist.Vastaukset;
  */
 public class Vaalikone extends HttpServlet {
 
+	public int LongToInt() {
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		try {
+
+			emf = Persistence.createEntityManagerFactory("vaalikones");
+			em = emf.createEntityManager();
+			Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
+			List listlkm = lkm.getResultList();
+			Long lukumaara = (Long) (listlkm.get(0));
+			int a = lukumaara != null ? lukumaara.intValue() : null;
+			// int s =(int)(long)lukumaara;
+			return a;
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
 	// hae java logger-instanssi
 	private final static Logger logger = Logger.getLogger(Loki.class.getName());
 
@@ -81,13 +99,14 @@ public class Vaalikone extends HttpServlet {
 			return;
 		}
 
-		Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
-		List listlkm = lkm.getResultList();
-		Long lukumaara = (Long) (listlkm.get(0));
-		//usr.setMagicNumber(lukumaara);
+//		Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
+//		List listlkm = lkm.getResultList();
+//		Long lukumaara = (Long) (listlkm.get(0));
+//		int a = lukumaara != null ? lukumaara.intValue() : null;
+		// usr.setMagicNumber(lukumaara);
 		/*
-		//usr.setMagicNumber(lukumaara);
-		*/
+		 * //usr.setMagicNumber(lukumaara);
+		 */
 		// hae url-parametri func joka määrittää toiminnon mitä halutaan tehdä.
 		// func=haeEhdokas: hae tietyn ehdokkaan tiedot ja vertaile niitä käyttäjän
 		// vastauksiin
@@ -116,9 +135,7 @@ public class Vaalikone extends HttpServlet {
 				kysymys_id++;
 			}
 			// jos kysymyksiä on vielä jäljellä, hae seuraava
-			if (kysymys_id <= lukumaara) {
-				System.out.println(kysymys_id);
-				System.out.println(lukumaara);
+			if (kysymys_id <= LongToInt()) {
 				try {
 					// Hae haluttu kysymys tietokannasta
 					Query q = em.createQuery("SELECT k FROM Kysymykset k WHERE k.kysymysId>=?1");
@@ -129,7 +146,7 @@ public class Vaalikone extends HttpServlet {
 					List<Kysymykset> tadaa = kysymysList.subList(0, 1);
 					// if (tadaa != null && !tadaa.isEmpty()) {
 					request.setAttribute("kysymykset", tadaa);
-					request.setAttribute("kysymysLkm", lukumaara);
+					request.setAttribute("kysymysLkm", LongToInt());
 					request.getRequestDispatcher("/vastaus.jsp").forward(request, response);
 					// }
 
@@ -146,7 +163,7 @@ public class Vaalikone extends HttpServlet {
 
 				// Tyhjennetään piste-array jotta pisteet eivät tuplaannu mahdollisen
 				// refreshin tapahtuessa
-				for (int i = 0; i < lukumaara; i++) {
+				for (int i = 0; i < LongToInt(); i++) {
 					usr.pisteet.set(i, new Tuple<>(0, 0));
 				}
 

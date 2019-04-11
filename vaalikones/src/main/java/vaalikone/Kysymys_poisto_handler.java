@@ -58,7 +58,6 @@ public class Kysymys_poisto_handler extends HttpServlet {
 		try {
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaalikone", "pena", "kukkuu");
 			Statement stmt = con.createStatement();
-			//String sql = "DELETE FROM kysymykset WHERE kysymys_id = '?'";
 
 			stmt.executeUpdate(("DELETE FROM kysymykset WHERE kysymys_id = \"" + poista + "\""));
 			stmt.executeUpdate(("DELETE FROM vastaukset WHERE kysymys_id = \"" + poista + "\""));
