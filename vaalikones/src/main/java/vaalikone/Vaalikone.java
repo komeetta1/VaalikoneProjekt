@@ -65,7 +65,7 @@ public class Vaalikone extends HttpServlet {
 		// jos käyttäjä-oliota ei löydy sessiosta, luodaan sinne sellainen
 		if (usr == null) {
 			usr = new Kayttaja();
-			logger.log(Level.FINE, "Luotu uusi k�ytt�j�olio");
+			logger.log(Level.FINE, "Luotu uusi k�ytt�j�olio");
 			session.setAttribute("usrobj", usr);
 		}
 		EntityManagerFactory emf = null;
@@ -74,7 +74,7 @@ public class Vaalikone extends HttpServlet {
 			emf = Persistence.createEntityManagerFactory("vaalikones");
 			em = emf.createEntityManager();
 		} catch (Exception e) {
-			response.getWriter().println("EMF+EM EI Onnistu");
+			response.getWriter().println("EMF+EmmmM EI Onnistu");
 
 			e.printStackTrace(response.getWriter());
 
@@ -84,7 +84,10 @@ public class Vaalikone extends HttpServlet {
 		Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
 		List listlkm = lkm.getResultList();
 		Long lukumaara = (Long) (listlkm.get(0));
-
+		//usr.setMagicNumber(lukumaara);
+		/*
+		//usr.setMagicNumber(lukumaara);
+		*/
 		// hae url-parametri func joka määrittää toiminnon mitä halutaan tehdä.
 		// func=haeEhdokas: hae tietyn ehdokkaan tiedot ja vertaile niitä käyttäjän
 		// vastauksiin

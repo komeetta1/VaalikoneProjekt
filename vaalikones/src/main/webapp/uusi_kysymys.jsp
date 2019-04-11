@@ -25,14 +25,6 @@ input {
 
 		<img id="headerimg" src="Logo.png" width="720" /> <br>
 
-		<h3>Kirjoita kysymys:</h3>
-
-		<form action="/kysymys_Servlet" method="post">
-			<input type="text" step="any" name="kysymys_add"> <input
-				id="submitnappi" type="submit" value="Lisaa kysymys"
-				name="btnAloita" />
-		</form>
-
 		<br>
 		
 		<form action = "/Kysymys_poisto">
@@ -41,6 +33,11 @@ input {
 				name="btnPoista" />
 		</form>
 		
+		<form action = "/Vastaustenlisaaminenjsp.jsp">
+			
+			<input type="submit" value="Siirry vastaamaan"
+				name="btnPoista" />
+		</form>
 		<form action = "index.html">
 			
 			<input type="submit" value="Siirry etusivulle"

@@ -8,7 +8,14 @@
 <%@page import="persist.Vastaukset"%>
 <%@page import="java.util.List"%>
 <%@page import="persist.Ehdokkaat"%>
+<%@page import="java.util.*,vaalikone.Kayttaja"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@page import="javax.persistence.Query"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="javax.persistence.EntityManagerFactory"%>
+<%@page import="javax.persistence.Persistence" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,12 +27,22 @@
         <div id="container">
             <h1>Diginide kertoo sinulle, ketä pitää äänestää:</h1>
             <%
+            
+	            EntityManagerFactory emf = null;
+	    		EntityManager em = null;
+	    		emf = Persistence.createEntityManagerFactory("vaalikones");
+				em = emf.createEntityManager();
+            
+	            Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
+	    		List listlkm = lkm.getResultList();
+	    		Long lukumaara = (Long) (listlkm.get(0));
+            
                 List<Ehdokkaat> parhaatEhdokkaat = (List<Ehdokkaat>) request.getAttribute("parasEhdokas");
                 List<Integer> kayttajanVastaukset = (List<Integer>) request.getAttribute("kayttajanVastaukset");
                 List<Vastaukset> parhaanEhdokkaanVastaukset = (List<Vastaukset>) request.getAttribute("parhaanEhdokkaanVastaukset");
                 List<Kysymykset> kaikkiKysymykset = (List<Kysymykset>) request.getAttribute("kaikkiKysymykset");
                 Double pisteet = (double) (Integer) request.getAttribute("pisteet");
-                Double prosentit = (double) Math.round(pisteet / (3 * 19) * 100);
+                Double prosentit = (double) Math.round(pisteet / (3 * lukumaara) * 100);
                 Integer jarjestysnumero = (Integer) request.getAttribute("jarjestysnumero");
 
                 if (jarjestysnumero > 0) {%>
@@ -54,22 +71,15 @@
             <p><%= seParasEhdokas.getMitaAsioitaHaluatEdistaa()%></p>
 
             <% }
-                if(kaikkiKysymykset == null || kaikkiKysymykset.size()==0){
-                	System.out.println("asdasd");
-                }
-                else{
-                	System.out.println("kaikkiKysymykset koko="+kaikkiKysymykset.size());
-                }
                 
                 for (int i = 0; i < parhaanEhdokkaanVastaukset.size(); i++) {
             %>
-            <b>Kysymys <%= i + 1%>: <%= kaikkiKysymykset.get(i).getKysymys()%></b><br>
+            <b>Kysymys <%=kaikkiKysymykset.get(i).getKysymysId()%> - <%= kaikkiKysymykset.get(i).getKysymys()%></b><br>
             <ul>
                 <li>Sinun vastaus: <%= kayttajanVastaukset.get(i + 1).toString()%></li>
                 <li>Ehdokkaan vastaus: <%= parhaanEhdokkaanVastaukset.get(i).getVastaus()%></li>
                 <li>Ehdokkaan kommentti: <%= parhaanEhdokkaanVastaukset.get(i).getKommentti()%></li>
             </ul>
-
 
             <%
                 }
