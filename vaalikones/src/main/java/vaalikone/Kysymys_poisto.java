@@ -115,7 +115,7 @@ public class Kysymys_poisto extends HttpServlet {
 			
 			// PALAA
 			out.println("<form action='uusi_kysymys.jsp' method='POST'/>");
-			out.println("<input type='submit' value='Palaa kysymyksen lisäykseen' name='palaabtn'</input>");
+			out.println("<input type='submit' value='Palaa edelliselle sivulle' name='palaabtn'</input>");
 			out.println("</form>");
 
 			// PALAA ETUSIVULLE
