@@ -97,13 +97,20 @@ public class Kysymys_poisto extends HttpServlet {
 			out.println("<input type='text' name='poista' placeholder='ID' size='3' maxlength='3'</input>");
 			out.println("<input type='submit' value='Poista' style=color:red;'</input>");
 			out.println("</form>");
+			
+			// LISAA
+			out.println("<form action='Kysymys_Servlet' method='POST'/>");
+			out.println("<p>Lisaa kysymys</p>");
+			out.println("<input type='text' name='lisaa' size='100' placeholder='Lisaa uusi kysymys'</input>");
+			out.println("<input type='submit' value='Lisaa' style=color:green;'</input>");
+			out.println("</form>");
 
 			// MUOKKAUS
 			out.println("<form action='Kysymys_muokkaus' method='POST'/>");
 			out.println("<p>Kirjoita uudestaan / muokkaa kysymystä</p>");
 			out.println("<input type='text' name='id' size='3' maxlength='3' placeholder='ID'</input>");
 			out.println("<input type='text' name='muokkaa' size='100' placeholder='Kirjoita uusi kysymys'</input>");
-			out.println("<input type='submit' value='Muokkaa' style=color:green;'</input>");
+			out.println("<input type='submit' value='Muokkaa' style=color:blue;'</input>");
 			out.println("</form>");
 
 			// PALAA

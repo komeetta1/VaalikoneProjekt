@@ -24,14 +24,13 @@ input {
 	<div id="container">
 
 		<img id="headerimg" src="Logo.png" width="720" /> <br>
-
+<!-- 
 		<h3>Kirjoita kysymys:</h3>
-
 		<form action="/kysymys_Servlet" method="post">
 			<input type="text" step="any" name="kysymys_add"> <input
 				id="submitnappi" type="submit" value="Lisaa kysymys"
 				name="btnAloita" />
-		</form>
+		</form> -->
 
 		<br>
 		

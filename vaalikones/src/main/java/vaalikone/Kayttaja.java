@@ -31,10 +31,7 @@ import persist.*;
  */
 public class Kayttaja implements Serializable {
 
-<<<<<<< HEAD
-	
-=======
->>>>>>> Jani
+
 	//Long magicNumber=0L;
 	/**
 	 * 
@@ -183,17 +180,14 @@ public class Kayttaja implements Serializable {
 	};
 
 //	public void setMagicNumber(Long lukumaara) {
-<<<<<<< HEAD
 //		magicNumber=lukumaara+1;
 //		
 //	}
 
-=======
 //		// TODO Auto-generated method stub
 //		magicNumber=lukumaara+1;
 //		
 //	}
->>>>>>> Jani
 }
 
 
