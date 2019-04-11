@@ -13,7 +13,17 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.servlet.RequestDispatcher;
+
+import org.apache.taglibs.standard.tag.common.core.CatchTag;
+
 import vaalikone.Tuple;
+import persist.*;
 
 /**
  *
@@ -21,36 +31,54 @@ import vaalikone.Tuple;
  */
 public class Kayttaja implements Serializable {
 
+
+	//Long magicNumber=0L;
 	/**
 	 * 
 	 */
+	
+	
 //	private static final long serialVersionUID = 3262098698622771486L;
 	/**
+	 * @return 
 	 * 
 	 */
+	
+	
+	public int LongToInt() {
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		try {
+
+			emf = Persistence.createEntityManagerFactory("vaalikones");
+			em = emf.createEntityManager();
+			Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
+			List listlkm = lkm.getResultList();
+			Long lukumaara = (Long) (listlkm.get(0));
+			int a = lukumaara != null ? lukumaara.intValue() : null;
+			return a;
+		}catch(Exception e) {
+			return 0;
+		}
+	}
+	
+
 
 //	private final ArrayList<Integer> vastaus = new ArrayList<>(20);
-	private ArrayList<Integer> vastaus = new ArrayList<>(20);
-	ArrayList<Tuple<Integer, Integer>> pisteet = new ArrayList<>(20);
+	private ArrayList<Integer> vastaus = new ArrayList<>(LongToInt());
+	ArrayList<Tuple<Integer, Integer>> pisteet = new ArrayList<>(LongToInt());
 //    private final static Logger logger = Logger.getLogger(Loki.class.getName());
 
 	/**
 	 * Kayttaja-olioon tallennetaan vaalikoneen käyttäjän tietoja.
 	 */
-//    public Kayttaja() {
-//
-//        //täytelläänhän listat valmiiksi
-//        for (int i = 0; i < 20; i++) {
-//            this.vastaus.add(0);
-//            this.pisteet.add(new Tuple<>(0, 0));
-//        }
-//
-//    }
+	
+	
 
 	public void taytaVastauksetJaPisteet() {
 
 		// täytelläänhän listat valmiiksi
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i <= LongToInt(); i++) {
 			this.vastaus.add(0);
 			this.pisteet.add(new Tuple<>(0, 0));
 		}
@@ -133,6 +161,7 @@ public class Kayttaja implements Serializable {
 	// http://stackoverflow.com/questions/5690537/sorting-a-tuple-based-on-one-of-the-fields
 	// Comparator<Tuple<Integer, Integer>> comparator = (Tuple<Integer, Integer> o1,
 	// Tuple<Integer, Integer> o2) -> o1.pisteet.compareTo(o2.pisteet);
+	
 	transient Comparator<Tuple<Integer, Integer>> comparator = new Comparator<Tuple<Integer, Integer>>() {
 		@Override
 		public int compare(Tuple<Integer, Integer> o1, Tuple<Integer, Integer> o2) {
@@ -141,3 +170,9 @@ public class Kayttaja implements Serializable {
 	};
 
 }
+//		// TODO Auto-generated method stub
+//		magicNumber=lukumaara+1;
+//		
+//	}
+
+
