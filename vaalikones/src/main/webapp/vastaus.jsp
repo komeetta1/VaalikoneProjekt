@@ -33,7 +33,6 @@
 		            @SuppressWarnings("unchecked")
 		            
 		            List<Kysymykset> kysymykset = (List<Kysymykset>)request.getAttribute("kysymykset");
-					
 		            for (Kysymykset kysymys : kysymykset) { %>
 		            <div class="kysymys">
 		                <%= kysymys.getKysymysId() %> / <%= request.getAttribute("kysymysLkm") %><br>
