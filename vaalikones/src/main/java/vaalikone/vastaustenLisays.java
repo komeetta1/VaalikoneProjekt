@@ -39,6 +39,10 @@ public class vastaustenLisays extends HttpServlet {
 		
 		RequestDispatcher rdKH=request.getRequestDispatcher("KysymystenHaku");
 		rdKH.include(request, response);
+		
+		//RequestDispatcher rdVH=request.getRequestDispatcher("VastaustenHaku");
+		//rdVH.include(request, response);
+		
 		List<Kysymykset> kaikkiKysymykset=(List<Kysymykset>)(request.getAttribute("kaikkiKysymykset"));
 		int lkm=kaikkiKysymykset.size();
 		String[] vastaus=new String[lkm];
@@ -50,8 +54,9 @@ public class vastaustenLisays extends HttpServlet {
 			kysymysnro[i]=request.getParameter("kysymysnro"+k.getKysymysId());
 			vastaus[i]=request.getParameter("vastaus"+k.getKysymysId());
 			perustelu[i]=request.getParameter("perusteluBox"+k.getKysymysId());
-
 		}
+		
+		
 		
 		String vastaaja;
 		String kysymysSTR;
@@ -67,9 +72,10 @@ public class vastaustenLisays extends HttpServlet {
 			//kysymysSTR = null;
 			vastaus = null;
 			perustelu = null;
-		} 
+		}
 		
-		//kysymysmaara = vastaus.length;
+		// Lähettää vastaaja-parametrin VastaustenHaku-servletille
+		request.setAttribute("vastannut", vastaaja);
 		
 		// Debuggausta varten kirjoittaa konsoliin asioita
 		System.out.println("Vastaaja oli: "+vastaaja);
@@ -97,15 +103,15 @@ public class vastaustenLisays extends HttpServlet {
 			vastausolio.setVastaus(Integer.parseInt(vastaus[i]));
 			vastausolio.setKommentti(perustelu[i]);
 			
-			lisaaVastaus(vastausolio);
+			boolean onvst;
+			onvst = request.getAttribute("onkovastannut") != null;
+			
+			lisaaVastaus(vastausolio, onvst);
 		}
 		
 	}
 	
-	
-	
-	
-	public void lisaaVastaus(Vastaukset kysymyksenvastaus){
+	public void lisaaVastaus(Vastaukset kysymyksenvastaus, boolean onvst){
         EntityManagerFactory emf=null;
         EntityManager em = null;
         try {
@@ -115,25 +121,26 @@ public class vastaustenLisays extends HttpServlet {
         catch(Exception e) {
           	return;
         }
-		
+        
+        em.getTransaction().begin();
 		try {
-			// KÄYTÄ em.merge !! Merge korvaa vanhan tiedon!
-			em.persist(kysymyksenvastaus);
-			//em.merge(kysymyksenvastaus);
+			if (onvst == true) {
+				em.merge(kysymyksenvastaus);
+			} else {
+				em.persist(kysymyksenvastaus);
+			}
+			
 		} catch(EntityExistsException exe) {
 			// KIRJOITA TÄHÄN VIRHEILMOITUS TMS. !
 		}
-		
-		try {
-			em.getTransaction().begin();
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			em.close();
-		}
+		em.getTransaction().commit();
+		em.close();
 
 	}
-	
+
+	/* Metodi, jota ei koskaan saatu valmiiksi; aika ajoi sen ohi
+	public void tarkistaVastaus(VastauksetPK vastausolioPK) {
+		
+	}
+	*/
 }
