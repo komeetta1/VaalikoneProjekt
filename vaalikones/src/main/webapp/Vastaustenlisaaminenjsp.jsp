@@ -79,7 +79,8 @@
 
 		<%}%>
 		</table>
-		<input id="submitnappi" type="submit" value="vastaa" name="btnEhVastaa" a href ='/vastaustenLisays'/>
+		
+		<input id="submitnappi" type="submit" value="vastaa" name="btnEhVastaa" a href ='/uusi_kysymys.jsp'/>
 		</div>
 		
 				

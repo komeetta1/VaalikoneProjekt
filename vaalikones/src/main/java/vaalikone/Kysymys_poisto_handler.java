@@ -61,6 +61,13 @@ public class Kysymys_poisto_handler extends HttpServlet {
 
 			stmt.executeUpdate(("DELETE FROM kysymykset WHERE kysymys_id = \"" + poista + "\""));
 			stmt.executeUpdate(("DELETE FROM vastaukset WHERE kysymys_id = \"" + poista + "\""));
+			try {
+				stmt.executeUpdate("ALTER TABLE kysymykset DROP COLUMN KYSYMYS_ID");
+				stmt.executeUpdate("ALTER TABLE kysymykset AUTO_INCREMENT = 1");
+				stmt.executeUpdate("ALTER TABLE kysymykset ADD KYSYMYS_ID int NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST");
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 			response.sendRedirect(request.getContextPath() + "/Kysymys_poisto");
 			System.out.println("Kysymys poistettu.");
 		} catch (Exception e) {

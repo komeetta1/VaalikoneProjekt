@@ -93,7 +93,7 @@ public class Kysymys_poisto extends HttpServlet {
 			
 			// LISAA
 			out.println("<form action='kysymys_Servlet' method='POST'/>");
-			out.println("<p>Lisaa kysymys</p>");
+			out.println("<p>Lis‰‰ kysymys</p>");
 			out.println("<input type='text' name='lisaa' size='100' placeholder='Kirjoita uusi kysymys'</input>");
 			out.println("<input type='submit' value='Lisaa' style=color:green;'</input>");
 			out.println("</form>");

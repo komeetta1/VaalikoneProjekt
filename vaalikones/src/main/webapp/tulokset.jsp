@@ -37,6 +37,10 @@
 	    		List listlkm = lkm.getResultList();
 	    		Long lukumaara = (Long) (listlkm.get(0));
 				int a = lukumaara != null ? lukumaara.intValue() : null;
+				if (em.getTransaction().isActive()) {
+					em.getTransaction().rollback();
+				}
+				em.close();
             
                 List<Ehdokkaat> parhaatEhdokkaat = (List<Ehdokkaat>) request.getAttribute("parasEhdokas");
                 List<Integer> kayttajanVastaukset = (List<Integer>) request.getAttribute("kayttajanVastaukset");

@@ -99,7 +99,8 @@ public class vastaustenLisays extends HttpServlet {
 			
 			lisaaVastaus(vastausolio);
 		}
-		
+
+		response.sendRedirect("http://localhost:8080/uusi_kysymys.jsp");
 	}
 	
 	

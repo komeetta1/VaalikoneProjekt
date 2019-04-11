@@ -39,6 +39,7 @@ import persist.Vastaukset;
  */
 public class Vaalikone extends HttpServlet {
 
+	//kysymykset lista kokonaisuudessaan muutetaan int muotoon
 	public int LongToInt() {
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
@@ -46,15 +47,19 @@ public class Vaalikone extends HttpServlet {
 
 			emf = Persistence.createEntityManagerFactory("vaalikones");
 			em = emf.createEntityManager();
-			Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
-			List listlkm = lkm.getResultList();
-			Long lukumaara = (Long) (listlkm.get(0));
-			int a = lukumaara != null ? lukumaara.intValue() : null;
-			// int s =(int)(long)lukumaara;
-			return a;
 		} catch (Exception e) {
 			return 0;
 		}
+
+		Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
+		List listlkm = lkm.getResultList();
+		Long lukumaara = (Long) (listlkm.get(0));
+		int a = lukumaara != null ? lukumaara.intValue() : null;
+		if (em.getTransaction().isActive()) {
+			em.getTransaction().rollback();
+		}
+		em.close();
+		return a;
 	}
 
 	// hae java logger-instanssi
@@ -98,15 +103,6 @@ public class Vaalikone extends HttpServlet {
 
 			return;
 		}
-
-//		Query lkm = em.createNativeQuery("SELECT COUNT(*) FROM kysymykset");
-//		List listlkm = lkm.getResultList();
-//		Long lukumaara = (Long) (listlkm.get(0));
-//		int a = lukumaara != null ? lukumaara.intValue() : null;
-		// usr.setMagicNumber(lukumaara);
-		/*
-		 * //usr.setMagicNumber(lukumaara);
-		 */
 		// hae url-parametri func joka määrittää toiminnon mitä halutaan tehdä.
 		// func=haeEhdokas: hae tietyn ehdokkaan tiedot ja vertaile niitä käyttäjän
 		// vastauksiin
@@ -144,11 +140,9 @@ public class Vaalikone extends HttpServlet {
 					// Lue haluttu kysymys listaan
 					List<Kysymykset> kysymysList = q.getResultList();
 					List<Kysymykset> tadaa = kysymysList.subList(0, 1);
-					// if (tadaa != null && !tadaa.isEmpty()) {
 					request.setAttribute("kysymykset", tadaa);
 					request.setAttribute("kysymysLkm", LongToInt());
 					request.getRequestDispatcher("/vastaus.jsp").forward(request, response);
-					// }
 
 				} finally {
 					// Sulje tietokantayhteys
