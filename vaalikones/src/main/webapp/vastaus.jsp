@@ -54,53 +54,6 @@
 		        %>
 
 
-
-
-		<%-- <%
-			@SuppressWarnings("unchecked")
-			List<Kysymykset> kysymykset = (List<Kysymykset>) request.getAttribute("kysymykset");
-			for (Kysymykset kysymys : kysymykset) {
-		%>
-		<div class="kysymys">
-			<%=kysymys.getKysymysId()%>
-			/
-			<%
-				EntityManagerFactory emf = null;
-					EntityManager em = null;
-					try {
-						emf = Persistence.createEntityManagerFactory("vaalikones");
-						em = emf.createEntityManager();
-					} catch (Exception e) {
-						response.getWriter().println("EMF+EM EI Onnistu");
-
-						e.printStackTrace(response.getWriter());
-
-						return;
-					}
-					Query q = em.createQuery("SELECT COUNT(*) FROM kysymykset");
-					out.println(q);
-			%><br>
-			<%=kysymys.getKysymys()%>
-		</div>
-		<form action="Vaalikone" id="vastausformi">
-			<label>1</label><input type="radio" name="vastaus" value="1" /> <label>2</label><input
-				type="radio" name="vastaus" value="2" /> <label>3</label><input>
-				type="radio" name="vastaus" value="3" checked="checked" /> <label>4</label><input
-				type="radio" name="vastaus" value="4" /> <label>5</label><input
-				type="radio" name="vastaus" value="5" /> <input type="hidden"
-				name="q" value="<%=kysymys.getKysymysId()%>"> <input
-				type="submit" id="submitnappi" value="Vastaa" />
-		</form>
-		<div class="kysymys">
-			<small>1 = Täysin eri mieltä<br>2 = Osittain eri mieltä<br>3
-				= En osaa sanoa<br>4 = Osittain samaa mieltä<br>5 = Täysin
-				samaa mieltä
-			</small>
-		</div>
-		<%
-			}
-		%> --%>
-
 	</div>
 
 </body>

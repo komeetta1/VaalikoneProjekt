@@ -15,6 +15,7 @@
 <%@page import="javax.persistence.EntityManager"%>
 <%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page import="javax.persistence.Persistence" %>
+<%@page import="persist.Kysymykset"%>
 
 <!DOCTYPE html>
 <html>
@@ -70,11 +71,10 @@
             <h2>Mitä asioita haluat edistää?</h2>
             <p><%= seParasEhdokas.getMitaAsioitaHaluatEdistaa()%></p>
 
-            <% }
-                
+            <% }  
                 for (int i = 0; i < parhaanEhdokkaanVastaukset.size(); i++) {
             %>
-            <b>Kysymys <%= i + 1%>: <%= kaikkiKysymykset.get(i).getKysymys()%></b><br>
+            <b>Kysymys <%= kaikkiKysymykset.get(i).getKysymysId()%> : <%= kaikkiKysymykset.get(i).getKysymys()%></b><br>
             <ul>
                 <li>Sinun vastaus: <%= kayttajanVastaukset.get(i + 1).toString()%></li>
                 <li>Ehdokkaan vastaus: <%= parhaanEhdokkaanVastaukset.get(i).getVastaus()%></li>
