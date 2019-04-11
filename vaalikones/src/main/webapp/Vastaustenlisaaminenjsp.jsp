@@ -31,14 +31,20 @@
 		</div>
 		<br>
 		<form action="/vastaustenLisays" method="GET">
+		<br>
+		<br>
+		<center>
+		<br><p>Vastaaja:</p>
 			<select name="vastaaja">
-				<% /** Looppi, joka käy tietokannasta saadut ehdokkaat lï¿½pi ja tulostaa ne dropdown-listaan*/
+				<% /** Looppi, joka käy tietokannasta saadut ehdokkaat läpi ja tulostaa ne dropdown-listaan*/
 					for(Ehdokkaat ehdokas : ehdokkaat) {%>
 						<option value="<%=ehdokas.getEhdokasId()%>"><%=ehdokas.getEhdokasId() %> - <%=ehdokas.getEtunimi() %>  <%=ehdokas.getSukunimi() %> - <%=ehdokas.getPuolue() %></option>
 					<%}
 				%>
 			</select>
-		<p>Tähän listataan kysymykset</p>
+			</center>
+			<br>
+		<hr>
 		
 
 		<div class=kysymys2>	
@@ -50,10 +56,10 @@
 		%>
 		<table name=vastaustaulu>
 		<%
-		/**Looppaa tietokannasta saadut kysymykset lï¿½pi, ja asettaa ne sopivaan HTML taulukkoon*/
+		/**Looppaa tietokannasta saadut kysymykset läpi, ja asettaa ne sopivaan HTML taulukkoon*/
 		for (Kysymykset kysymys : kysymykset) {%>
 			<%
-			// tulostaa kysymykset konsoliin, lï¿½hinnï¿½ debuggausta varten
+			// tulostaa kysymykset konsoliin, lähinnä debuggausta varten
 			// System.out.println(kysymys);%>
 			<tr>
 				<input type="hidden" name="kysymysnro<%=kysymys.getKysymysId()%>" value="<%=kysymys.getKysymysId()%>">
