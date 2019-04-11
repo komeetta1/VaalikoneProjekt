@@ -44,7 +44,7 @@
 		<div class=kysymys2>	
 		<%
 		if (kysymykset==null){
-			out.println("KYsymyslista oli tyhjä, ja tämä on virheilmoitus: oh no :| ");
+			out.println("Kysymyslista oli tyhjä, ja tämä on virheilmoitus: oh no :| ");
 			return;
 		}
 		%>
