@@ -39,12 +39,9 @@ public class KysymystenHaku extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		processRequest(request, response);
-		// Testaa kysymyksen hakua tietokannasta kysymys IDn perusteella: 
-		// response.getWriter().println(haeKysymys(5));	
 	}
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
-		//haeKysymyksetKaikki();
 		List<Kysymykset> kaikkiKysymykset = haeKysymyksetKaikki();
         
         //ohjaa tiedot tulosten esityssivulle
@@ -93,7 +90,9 @@ public class KysymystenHaku extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        finally {
+        	em.close();
+        }
         return null;
-
 	}
 }
