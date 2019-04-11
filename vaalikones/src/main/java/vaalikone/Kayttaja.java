@@ -31,10 +31,6 @@ import persist.*;
  */
 public class Kayttaja implements Serializable {
 
-<<<<<<< HEAD
-	
-=======
->>>>>>> Jani
 	//Long magicNumber=0L;
 	/**
 	 * 
@@ -175,25 +171,16 @@ public class Kayttaja implements Serializable {
 	// http://stackoverflow.com/questions/5690537/sorting-a-tuple-based-on-one-of-the-fields
 	// Comparator<Tuple<Integer, Integer>> comparator = (Tuple<Integer, Integer> o1,
 	// Tuple<Integer, Integer> o2) -> o1.pisteet.compareTo(o2.pisteet);
+	
 	transient Comparator<Tuple<Integer, Integer>> comparator = new Comparator<Tuple<Integer, Integer>>() {
 		@Override
 		public int compare(Tuple<Integer, Integer> o1, Tuple<Integer, Integer> o2) {
 			return o1.pisteet.compareTo(o2.pisteet);
 		}
 	};
-
-//	public void setMagicNumber(Long lukumaara) {
-<<<<<<< HEAD
-//		magicNumber=lukumaara+1;
-//		
-//	}
-
-=======
-//		// TODO Auto-generated method stub
-//		magicNumber=lukumaara+1;
-//		
-//	}
->>>>>>> Jani
 }
 
-
+//	public void setMagicNumber(Long lukumaara) {
+//		magicNumber=lukumaara+1;
+//		
+//	}
