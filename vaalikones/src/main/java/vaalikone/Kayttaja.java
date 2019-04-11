@@ -170,9 +170,5 @@ public class Kayttaja implements Serializable {
 	};
 
 }
-//		// TODO Auto-generated method stub
-//		magicNumber=lukumaara+1;
-//		
-//	}
 
 

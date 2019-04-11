@@ -39,7 +39,7 @@ import persist.Vastaukset;
  */
 public class Vaalikone extends HttpServlet {
 
-	//kysymykset lista kokonaisuudessaan muutetaan int muotoon
+	// kysymykset lista kokonaisuudessaan muutetaan int muotoon
 	public int LongToInt() {
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
