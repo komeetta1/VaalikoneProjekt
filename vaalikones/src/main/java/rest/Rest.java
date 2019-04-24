@@ -12,14 +12,21 @@ import java.util.ArrayList;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 
-
 @Path("/riistaservice")
-public class HelloRestWorld {
+public class Rest {
 
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String terve() {
 		String output = "Terve!";
+		return output;
+	}
+
+	@GET
+	@Path("/terve")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String tervehdi() {
+		String output = "Terve, Pena!";
 		return output;
 	}
 
