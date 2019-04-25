@@ -35,24 +35,27 @@ public class HelloRestWorld {
 	}
 	
 
-	@GET
+	@POST
 	@Path("/tuo")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<Ehdokkaat> getKaikki() {
+	public void getEhdokkaat(Ehdokkaat x) {
 
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
 		try {
 			emf = Persistence.createEntityManagerFactory("vaalikones");
 			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			em.persist(x);
+			em.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		ArrayList<Ehdokkaat> list = new ArrayList<>();
-		Query query = em.createNamedQuery("Ehdokkaat.findAll");
-
-		list.addAll(query.getResultList());
-		return list;
+//
+//		ArrayList<Ehdokkaat> list = new ArrayList<>();
+//		Query query = em.createNamedQuery("Ehdokkaat.findAll");
+//
+//		list.addAll(query.getResultList());
+//		return list;
 	}
 }
