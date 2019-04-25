@@ -7,21 +7,38 @@
 <body>
 
 	<form id="ehdokas_lomake" onsubmit ="return false;">
-		<input type="text" name="ehdokasId" value="">
-		<input type="text" name="sukunimi" value="">
-		<input type="text" name="etunimi" value="">
-		<input type="text" name="puolue" value="">
-		<input type="text" name="kotipaikkakunta" value="">
-		<input type="text" name="miksiEduskuntaan" value="">
-		<input type="text" name="mitaAsioitaHaluatEdistaa" value="">
-		<input type="text" name="ammatti" value="">
+		<input type="text" name="EHDOKAS_ID" value="">
+		<input type="text" name="SUKUNIMI" value="">
+		<input type="text" name="ETUNIMI" value="">
+		<input type="text" name="PUOLUE" value="">
+		<input type="text" name="KOTIPAIKKAKUNTA" value="">
+		<input type="text" name=IKA value="">
+		<input type="text" name="MIKSI_EDUSKUNTAAN" value="">
+		<input type="text" name="MITA_ASIOITA_HALUAT_EDISTAA" value="">
+		<input type="text" name="AMMATTI" value="">
 	</form>
+	<div id = 'asd'></div>
 	
 	<button onclick="laheta();">"Lähetä"</button>
 	
 	<script>
 	function laheta(){
-		var 
+		var tiedot = document.getElementById("ehdokas_lomake");
+		
+		var ehdokas = new Object();
+		ehdokas.EHDOKAS_ID = tiedot.EHDOKAS_ID.value;
+		ehdokas.SUKUNIMI = tiedot.SUKUNIMI.value;
+		ehdokas.ETUNIMI = tiedot.ETUNIMI.value;
+		ehdokas.PUOLUE = tiedot.PUOLUE.value;
+		ehdokas.KOTIPAIKKAKUNTA = tiedot.KOTIPAIKKAKUNTA.value;
+		ehdokas.IKA = tiedot.IKA.value;
+		ehdokas.MIKSI_EDUSKUNTAAN = tiedot.MIKSI_EDUSKUNTAAN.value;
+		ehdokas.MITA_ASIOITA_HALUAT_EDISTAA = tiedot.MITA_ASIOITA_HALUAT_EDISTAA.value;
+		ehdokas.AMMATTI = tiedot.AMMATTI.value;
+		
+		var jsonehdokas = JSON.stringify(ehdokas);
+		
+		document.getElementById("asd").innerHTML=jsonehdokas;
 	}
 	</script>
 	
