@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
@@ -32,9 +33,10 @@ public class HelloRestWorld {
 		String output = "Terve, Pena!";
 		return output;
 	}
+	
 
 	@GET
-	@Path("/tuoEhdokkaat")
+	@Path("/tuo")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Ehdokkaat> getKaikki() {
 
