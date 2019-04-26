@@ -34,6 +34,29 @@ public class HelloRestWorld {
 		return output;
 	}
 	
+	@GET
+	@Path("/vie")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void UusiEhdokas() {
+
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		try {
+			emf = Persistence.createEntityManagerFactory("vaalikones");
+			em = emf.createEntityManager();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+
+		ArrayList<Ehdokkaat> list = new ArrayList<>();
+		Query query = em.createNamedQuery("Ehdokkaat.findAll");
+
+		list.addAll(query.getResultList());
+		return;
+	}
 
 	@POST
 	@Path("/tuo")
