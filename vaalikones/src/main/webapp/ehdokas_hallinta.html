@@ -37,8 +37,23 @@
 		ehdokas.AMMATTI = tiedot.AMMATTI.value;
 		
 		var jsonehdokas = JSON.stringify(ehdokas);
-		
 		document.getElementById("asd").innerHTML=jsonehdokas;
+		
+		var xhttp = new XMLHttpRequest();
+
+		  xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		     document.getElementById("asd").innerHTML = this.responseText;
+		     var palautettu=JSON.parse(this.responseText);
+		     document.getElementById("osina").innerHTML="ID="+palautettu.id+" koko="+palautettu.paino+" Rotu="+palautettu.laji;
+		    }
+		    else{
+		    }
+		  };
+		  
+			xhttp.open("POST","./rest/vaalikone/tuo",true);
+			xhttp.setRequestHeader("Content-type","application/json");
+		  xhttp.send(jsonElain);
 	}
 	</script>
 	
