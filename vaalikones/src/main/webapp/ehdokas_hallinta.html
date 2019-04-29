@@ -102,19 +102,18 @@
 	<div id='poistettuid'></div>
 	<script>
 		function poista() {
-			var tiedot = document.getElementById("poisto_lomake");
-
-			var ehdokas = new Object();
+			var tiedot = document.getElementById("poisto_lomake").EHDOKAS_ID.value;
+			console.log(tiedot);
+			/* var ehdokas = new Object();
 			ehdokas.ehdokasId = tiedot.EHDOKAS_ID.value;
 
 			var jsonehdokas = JSON.stringify(ehdokas);
-			document.getElementById("poistettuid").innerHTML = jsonehdokas;
+			document.getElementById("poistettuid").innerHTML = jsonehdokas; */
 
 			var xhttp = new XMLHttpRequest();
 
-			xhttp.open("POST", "./rest/vaalikone/poista", true);
-			xhttp.setRequestHeader("Content-type", "application/json");
-			xhttp.send(jsonehdokas);
+			xhttp.open("GET", "./rest/vaalikone/poista/" + tiedot, true);
+			xhttp.send();
 		}
 	</script>
 </body>

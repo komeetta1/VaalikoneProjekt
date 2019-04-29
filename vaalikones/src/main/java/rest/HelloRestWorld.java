@@ -71,18 +71,18 @@ public class HelloRestWorld {
 	}
 	
 	//Ehdokkaiden poisto
-	@POST
-	@Path("/poista")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void poistaEhdokkaat(Ehdokkaat x) {
+	@GET
+	@Path("/poista/{param}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public void poistaEhdokkaat(@PathParam("param")int id) {
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
 		try {
 			emf = Persistence.createEntityManagerFactory("vaalikones");
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			//Ehdokkaat asd=em.find(Ehdokkaat.class, id);
-			em.remove(x);
+			Ehdokkaat asd=em.find(Ehdokkaat.class, id);
+			em.remove(asd);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
