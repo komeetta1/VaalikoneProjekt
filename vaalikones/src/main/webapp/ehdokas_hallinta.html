@@ -7,26 +7,26 @@
 <body>
 
 	<form id="ehdokas_lomake" onsubmit ="return false;">
-		<input type="text" name="EHDOKAS_ID" value="" placeholder="ID">
-		<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi">
-		<input type="text" name="ETUNIMI" value="" placeholder="Etunimi">
-		<input type="text" name="PUOLUE" value="" placeholder="Puolue">
-		<input type="text" name="KOTIPAIKKAKUNTA" value="" placeholder="Kotipaikkakunta">
-		<input type="text" name=IKA value="" placeholder="Ika">
-		<input type="text" name="MIKSI_EDUSKUNTAAN" value="" placeholder="Miksi">
-		<input type="text" name="MITA_ASIOITA_HALUAT_EDISTAA" value="" placeholder="Mita edistaa">
-		<input type="text" name="AMMATTI" value="" placeholder="Ammatti">
+		<!--  <input type="text" name="EHDOKAS_ID" value="" placeholder="ID"><br> -->
+		<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
+		<input type="text" name="ETUNIMI" value="" placeholder="Etunimi"><br>
+		<input type="text" name="PUOLUE" value="" placeholder="Puolue"><br>
+		<input type="text" name="KOTIPAIKKAKUNTA" value="" placeholder="Kotipaikkakunta"><br>
+		<input type="text" name=IKA value="" placeholder="Ika"><br>
+		<input type="text" name="MIKSI_EDUSKUNTAAN" value="" placeholder="Miksi eduskuntaan?"><br>
+		<input type="text" name="MITA_ASIOITA_HALUAT_EDISTAA" value="" placeholder="Mita haluat edistaa?"><br>
+		<input type="text" name="AMMATTI" value="" placeholder="Ammatti"><br>
 	</form>
 	<div id = 'tekstikentta'></div>
 	
-	<button onclick="laheta();">L�het�</button>
+	<button onclick="laheta();">Lisaa ehdokas</button>
 	
 	<script>
 	function laheta(){
 		var tiedot = document.getElementById("ehdokas_lomake");
 		
 		var ehdokas = new Object();
-		ehdokas.ehdokasId = tiedot.EHDOKAS_ID.value;
+		/* ehdokas.ehdokasId = tiedot.EHDOKAS_ID.value; */
 		ehdokas.sukunimi = tiedot.SUKUNIMI.value;
 		ehdokas.etunimi = tiedot.ETUNIMI.value;
 		ehdokas.puolue = tiedot.PUOLUE.value;
