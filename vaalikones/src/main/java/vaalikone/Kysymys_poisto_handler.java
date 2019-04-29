@@ -5,25 +5,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import java.sql.Statement;
-import java.util.List;
-import java.sql.ResultSet;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import persist.Ehdokkaat;
 
 /**
  * Servlet implementation class Kysymys_poisto_handler
  */
-@WebServlet(name = "kysymys_poisto_hand", urlPatterns = { "/Kysymys_poisto_handler" })
+@WebServlet(name = "kysymys_poisto_hand", urlPatterns = { "/Kysymys_poisto" })
 public class Kysymys_poisto_handler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -68,7 +60,7 @@ public class Kysymys_poisto_handler extends HttpServlet {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			response.sendRedirect(request.getContextPath() + "/Kysymys_poisto");
+			response.sendRedirect(request.getContextPath() + "/Kysymys_hallinta");
 			System.out.println("Kysymys poistettu.");
 		} catch (Exception e) {
 		} finally {

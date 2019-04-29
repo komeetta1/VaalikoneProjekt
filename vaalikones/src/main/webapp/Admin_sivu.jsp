@@ -1,16 +1,15 @@
-<%@page import="vaalikone.kysymys_Servlet"%>
 <%@page import="persist.Kysymykset"%>
 <%@page import="persist.Vastaukset"%>
 <%@page import="java.util.List"%>
 <%@page import="persist.Ehdokkaat"%>
-<%@page import="vaalikone.Kysymys_poisto"%>
+<%@page import="vaalikone.Kysymys_hallintasivu"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>Kysymyksen lisays</title>
+<title>Adminpage</title>
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -24,10 +23,8 @@ input {
 	<div id="container">
 
 		<img id="headerimg" src="Logo.png" width="720" /> <br>
-
 		<br>
-		
-		<form action = "/Kysymys_poisto">
+		<form action = "/Kysymys_hallinta">
 			
 			<input type="submit" value="Siirry kysymyksien hallintaan"
 				name="btnPoista" />
