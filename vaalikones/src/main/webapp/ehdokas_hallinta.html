@@ -90,18 +90,21 @@
 		document.getElementById("muokattuteksti").innerHTML=jsonehdokas;
 		
 		var xhttp = new XMLHttpRequest();
-
 		  
-			xhttp.open("POST","./rest/vaalikone/muokkaa",true);
-			xhttp.setRequestHeader("Content-type","application/json");
-		  xhttp.send(jsonehdokas);
+		xhttp.open("POST","./rest/vaalikone/muokkaa",true);
+		xhttp.setRequestHeader("Content-type","application/json");
+	  	xhttp.send(jsonehdokas);
 	}
 	</script>
 	
 	<br><br>
+	<form action="/Admin_sivu.jsp">
+	<input type="submit" value="Palaa admin -sivulle" name="btnAdminSivu"/>
+	</form>
 	<form action="index.html" method="POST">
 	<input type="submit" value="Palaa etusivulle" name="palaaetusbtn"/>
 	</form>
+	
 </div>
 </body>
 </html>

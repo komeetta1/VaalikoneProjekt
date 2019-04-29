@@ -30,6 +30,10 @@ input {
 				name="btnPoista" />
 		</form>
 		
+		<form action="/ehdokas_hallinta.html">
+		<input type="submit" value="Siirry ehdokkaiden hallintaan" name="btnEhdokasHallinta" />
+		</form>
+		
 		<form action = "/Vastaustenlisaaminenjsp.jsp">
 			
 			<input type="submit" value="Siirry vastaamaan"
