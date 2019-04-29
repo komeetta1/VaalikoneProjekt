@@ -7,53 +7,44 @@
 <body>
 
 	<form id="ehdokas_lomake" onsubmit ="return false;">
-		<input type="text" name="EHDOKAS_ID" value="">
-		<input type="text" name="SUKUNIMI" value="">
-		<input type="text" name="ETUNIMI" value="">
-		<input type="text" name="PUOLUE" value="">
-		<input type="text" name="KOTIPAIKKAKUNTA" value="">
-		<input type="text" name=IKA value="">
-		<input type="text" name="MIKSI_EDUSKUNTAAN" value="">
-		<input type="text" name="MITA_ASIOITA_HALUAT_EDISTAA" value="">
-		<input type="text" name="AMMATTI" value="">
+		<input type="text" name="EHDOKAS_ID" value="" placeholder="ID">
+		<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi">
+		<input type="text" name="ETUNIMI" value="" placeholder="Etunimi">
+		<input type="text" name="PUOLUE" value="" placeholder="Puolue">
+		<input type="text" name="KOTIPAIKKAKUNTA" value="" placeholder="Kotipaikkakunta">
+		<input type="text" name=IKA value="" placeholder="Ika">
+		<input type="text" name="MIKSI_EDUSKUNTAAN" value="" placeholder="Miksi">
+		<input type="text" name="MITA_ASIOITA_HALUAT_EDISTAA" value="" placeholder="Mita edistaa">
+		<input type="text" name="AMMATTI" value="" placeholder="Ammatti">
 	</form>
-	<div id = 'asd'></div>
+	<div id = 'tekstikentta'></div>
 	
-	<button onclick="laheta();">"Lähetä"</button>
+	<button onclick="laheta();">Lähetä</button>
 	
 	<script>
 	function laheta(){
 		var tiedot = document.getElementById("ehdokas_lomake");
 		
 		var ehdokas = new Object();
-		ehdokas.EHDOKAS_ID = tiedot.EHDOKAS_ID.value;
-		ehdokas.SUKUNIMI = tiedot.SUKUNIMI.value;
-		ehdokas.ETUNIMI = tiedot.ETUNIMI.value;
-		ehdokas.PUOLUE = tiedot.PUOLUE.value;
-		ehdokas.KOTIPAIKKAKUNTA = tiedot.KOTIPAIKKAKUNTA.value;
-		ehdokas.IKA = tiedot.IKA.value;
-		ehdokas.MIKSI_EDUSKUNTAAN = tiedot.MIKSI_EDUSKUNTAAN.value;
-		ehdokas.MITA_ASIOITA_HALUAT_EDISTAA = tiedot.MITA_ASIOITA_HALUAT_EDISTAA.value;
-		ehdokas.AMMATTI = tiedot.AMMATTI.value;
+		ehdokas.ehdokasId = tiedot.EHDOKAS_ID.value;
+		ehdokas.sukunimi = tiedot.SUKUNIMI.value;
+		ehdokas.etunimi = tiedot.ETUNIMI.value;
+		ehdokas.puolue = tiedot.PUOLUE.value;
+		ehdokas.kotipaikkakunta = tiedot.KOTIPAIKKAKUNTA.value;
+		ehdokas.ika = tiedot.IKA.value;
+		ehdokas.miksiEduskuntaan = tiedot.MIKSI_EDUSKUNTAAN.value;
+		ehdokas.mitaAsioitaHaluatEdistaa = tiedot.MITA_ASIOITA_HALUAT_EDISTAA.value;
+		ehdokas.ammatti = tiedot.AMMATTI.value;
 		
 		var jsonehdokas = JSON.stringify(ehdokas);
-		document.getElementById("asd").innerHTML=jsonehdokas;
+		document.getElementById("tekstikentta").innerHTML=jsonehdokas;
 		
 		var xhttp = new XMLHttpRequest();
 
-		  xhttp.onreadystatechange = function() {
-		    if (this.readyState == 4 && this.status == 200) {
-		     document.getElementById("asd").innerHTML = this.responseText;
-		     var palautettu=JSON.parse(this.responseText);
-		     document.getElementById("osina").innerHTML="ID="+palautettu.id+" koko="+palautettu.paino+" Rotu="+palautettu.laji;
-		    }
-		    else{
-		    }
-		  };
 		  
 			xhttp.open("POST","./rest/vaalikone/tuo",true);
 			xhttp.setRequestHeader("Content-type","application/json");
-		  xhttp.send(jsonElain);
+		  xhttp.send(jsonehdokas);
 	}
 	</script>
 	

@@ -37,9 +37,9 @@ public class HelloRestWorld {
 
 	@POST
 	@Path("/tuo")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public void getEhdokkaat(Ehdokkaat x) {
-
+		System.out.println("Moi");
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
 		try {
