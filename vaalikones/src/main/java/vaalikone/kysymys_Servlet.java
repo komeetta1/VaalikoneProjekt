@@ -17,7 +17,6 @@ import javax.persistence.Query;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.sql.Statement;
-import com.sun.xml.bind.CycleRecoverable.Context;
 
 import persist.Kysymykset;
 
