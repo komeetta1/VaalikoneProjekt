@@ -33,33 +33,10 @@ public class HelloRestWorld {
 		String output = "Terve, Pena!";
 		return output;
 	}
-	
-	@GET
-	@Path("/vie")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void UusiEhdokas() {
 
-		EntityManagerFactory emf = null;
-		EntityManager em = null;
-		try {
-			emf = Persistence.createEntityManagerFactory("vaalikones");
-			em = emf.createEntityManager();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-
-		ArrayList<Ehdokkaat> list = new ArrayList<>();
-		Query query = em.createNamedQuery("Ehdokkaat.findAll");
-
-		list.addAll(query.getResultList());
-		return;
-	}
-
+	//Ehdokkaiden lisäys
 	@POST
-	@Path("/tuo")
+	@Path("/lisaa")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getEhdokkaat(Ehdokkaat x) {
 		System.out.println("Moi");
@@ -74,11 +51,24 @@ public class HelloRestWorld {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//
-//		ArrayList<Ehdokkaat> list = new ArrayList<>();
-//		Query query = em.createNamedQuery("Ehdokkaat.findAll");
-//
-//		list.addAll(query.getResultList());
-//		return list;
+	}
+
+	//Ehdokkaiden muokkaus
+	@POST
+	@Path("/muokkaa")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void muokkaaEhdokkaat(Ehdokkaat x) {
+		System.out.println("Moi");
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		try {
+			emf = Persistence.createEntityManagerFactory("vaalikones");
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			em.merge(x);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
