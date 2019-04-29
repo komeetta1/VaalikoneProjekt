@@ -3,10 +3,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Ehdokas hallintasivu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
+<div id = "container">
 	<form id="ehdokas_lomake" onsubmit ="return false;">
+		<img id="headerimg" src="Logo.png" width="720" /> <br>
 		<!--  <input type="text" name="EHDOKAS_ID" value="" placeholder="ID"><br> -->
 		<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
 		<input type="text" name="ETUNIMI" value="" placeholder="Etunimi"><br>
@@ -14,12 +17,13 @@
 		<input type="text" name="KOTIPAIKKAKUNTA" value="" placeholder="Kotipaikkakunta"><br>
 		<input type="text" name=IKA value="" placeholder="Ika"><br>
 		<input type="text" name="MIKSI_EDUSKUNTAAN" value="" placeholder="Miksi eduskuntaan?"><br>
-		<textarea rows="4" cols="50" name="MITA_ASIOITA_HALUAT_EDISTAA"></textarea><br>
+		<textarea rows="4" cols="50" name="MITA_ASIOITA_HALUAT_EDISTAA" placeholder ="Mita haluat edistaa?"></textarea><br>
 		<!-- <input type="text" name="MITA_ASIOITA_HALUAT_EDISTAA" value="" placeholder="Mita haluat edistaa?"><br> -->
 		<input type="text" name="AMMATTI" value="" placeholder="Ammatti"><br>
 	</form>
-	
+	<br>
 	<button onclick="laheta();">Lisaa ehdokas</button>
+	<br><br><br>
 	<div id = 'tekstikentta'></div>
 	
 
@@ -57,12 +61,15 @@
 		<input type="text" name="KOTIPAIKKAKUNTA" value="" placeholder="Kotipaikkakunta"><br>
 		<input type="text" name=IKA value="" placeholder="Ika"><br>
 		<input type="text" name="MIKSI_EDUSKUNTAAN" value="" placeholder="Miksi eduskuntaan?"><br>
-		<input type="text" name="MITA_ASIOITA_HALUAT_EDISTAA" value="" placeholder="Mita haluat edistaa?"><br>
+		<textarea rows="4" cols="50" name="MITA_ASIOITA_HALUAT_EDISTAA" placeholder ="Mita haluat edistaa?"></textarea><br>
 		<input type="text" name="AMMATTI" value="" placeholder="Ammatti"><br>
 		
 	</form>
-	<button onclick="muokkaa();">Muokkaa ehdokas</button>
+	<br>
+	<button onclick="muokkaa();">Muokkaa ehdokasta</button>
 	<div id = 'muokattuteksti'></div>
+	
+	
 	
 	<script>
 	function muokkaa() {
@@ -90,6 +97,11 @@
 		  xhttp.send(jsonehdokas);
 	}
 	</script>
-
+	
+	<br><br>
+	<form action="index.html" method="POST">
+	<input type="submit" value="Palaa etusivulle" name="palaaetusbtn"/>
+	</form>
+</div>
 </body>
 </html>
