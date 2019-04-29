@@ -39,7 +39,6 @@ public class HelloRestWorld {
 	@Path("/lisaa")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getEhdokkaat(Ehdokkaat x) {
-		System.out.println("Moi");
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
 		try {
@@ -58,7 +57,6 @@ public class HelloRestWorld {
 	@Path("/muokkaa")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void muokkaaEhdokkaat(Ehdokkaat x) {
-		System.out.println("Moi");
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
 		try {
@@ -66,6 +64,25 @@ public class HelloRestWorld {
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
 			em.merge(x);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//Ehdokkaiden poisto
+	@POST
+	@Path("/poista")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void poistaEhdokkaat(Ehdokkaat x) {
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		try {
+			emf = Persistence.createEntityManagerFactory("vaalikones");
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			//Ehdokkaat asd=em.find(Ehdokkaat.class, id);
+			em.remove(x);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
