@@ -112,8 +112,6 @@
 					     document.getElementById("poistettuid").innerHTML = this.responseText;
 					     var palautettu=JSON.parse(this.responseText);
 					    }
-					    else{
-					    }
 					  };
 
 				xhttp.open("GET", "./rest/vaalikone/poista/" + tiedot, true);
