@@ -2,119 +2,132 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Ehdokas hallintasivu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<div id="container">
+		<img id="headerimg" src="Logo.png" width="720" /> <br>
 
-	<form id="ehdokas_lomake" onsubmit="return false;">
-		<!--  <input type="text" name="EHDOKAS_ID" value="" placeholder="ID"><br> -->
-		<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
-		<input type="text" name="ETUNIMI" value="" placeholder="Etunimi"><br>
-		<input type="text" name="PUOLUE" value="" placeholder="Puolue"><br>
-		<input type="text" name="KOTIPAIKKAKUNTA" value=""
-			placeholder="Kotipaikkakunta"><br> <input type="text"
-			name=IKA value="" placeholder="Ika"><br> <input
-			type="text" name="MIKSI_EDUSKUNTAAN" value=""
-			placeholder="Miksi eduskuntaan?"><br>
-		<textarea rows="4" cols="50" name="MITA_ASIOITA_HALUAT_EDISTAA"></textarea>
+		<form id="ehdokas_lomake" onsubmit="return false;">
+			<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
+			<input type="text" name="ETUNIMI" value="" placeholder="Etunimi"><br>
+			<input type="text" name="PUOLUE" value="" placeholder="Puolue"><br>
+			<input type="text" name="KOTIPAIKKAKUNTA" value="" placeholder="Kotipaikkakunta"><br> 
+			<input type="text" name=IKA value="" placeholder="Ika"><br> 
+			<input type="text" name="MIKSI_EDUSKUNTAAN" value="" placeholder="Miksi eduskuntaan?"><br>
+			<textarea rows="4" cols="50" name="MITA_ASIOITA_HALUAT_EDISTAA" placeholder = "Mita asioita haluat edistaa?"></textarea><br>
+			<input type="text" name="AMMATTI" value="" placeholder="Ammatti"><br>
+		</form>
 		<br>
-		<!-- <input type="text" name="MITA_ASIOITA_HALUAT_EDISTAA" value="" placeholder="Mita haluat edistaa?"><br> -->
-		<input type="text" name="AMMATTI" value="" placeholder="Ammatti"><br>
-	</form>
 
-	<button onclick="laheta();">Lisaa ehdokas</button>
-	<div id='tekstikentta'></div>
+		<button onclick="laheta();">Lisaa ehdokas</button><br><br><br>
+		<div id='tekstikentta'></div>
+
+		<script>
+			function laheta() {
+				var tiedot = document.getElementById("ehdokas_lomake");
+
+				var ehdokas = new Object();
+				ehdokas.sukunimi = tiedot.SUKUNIMI.value;
+				ehdokas.etunimi = tiedot.ETUNIMI.value;
+				ehdokas.puolue = tiedot.PUOLUE.value;
+				ehdokas.kotipaikkakunta = tiedot.KOTIPAIKKAKUNTA.value;
+				ehdokas.ika = tiedot.IKA.value;
+				ehdokas.miksiEduskuntaan = tiedot.MIKSI_EDUSKUNTAAN.value;
+				ehdokas.mitaAsioitaHaluatEdistaa = tiedot.MITA_ASIOITA_HALUAT_EDISTAA.value;
+				ehdokas.ammatti = tiedot.AMMATTI.value;
+
+				var jsonehdokas = JSON.stringify(ehdokas);
+				document.getElementById("tekstikentta").innerHTML = jsonehdokas;
+
+				var xhttp = new XMLHttpRequest();
+
+				xhttp.open("POST", "./rest/vaalikone/lisaa", true);
+				xhttp.setRequestHeader("Content-type", "application/json");
+				xhttp.send(jsonehdokas);
+			}
+		</script>
 
 
+		<form id="muokkaus_lomake" onsubmit="return false;">
+			<input type="text" name="EHDOKAS_ID" value="" placeholder="ID"><br>
+			<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
+			<input type="text" name="ETUNIMI" value="" placeholder="Etunimi"><br>
+			<input type="text" name="PUOLUE" value="" placeholder="Puolue"><br>
+			<input type="text" name="KOTIPAIKKAKUNTA" value="" placeholder="Kotipaikkakunta"><br> 
+			<input type="text" name=IKA value="" placeholder="Ika"><br> 
+			<input type="text" name="MIKSI_EDUSKUNTAAN" value="" placeholder="Miksi eduskuntaan?"><br> 
+			<textarea rows="4" cols="50" name="MITA_ASIOITA_HALUAT_EDISTAA" placeholder = "Mita asioita haluat edistaa?"></textarea><br>
+			<input type="text" name="AMMATTI" value="" placeholder="Ammatti"><br>
 
-	<script>
-		function laheta() {
-			var tiedot = document.getElementById("ehdokas_lomake");
+		<br>
+		</form>
+		<button onclick="muokkaa();">Muokkaa ehdokasta</button><br><br><br>
+		<div id='muokattuteksti'></div>
+		
 
-			var ehdokas = new Object();
-			ehdokas.sukunimi = tiedot.SUKUNIMI.value;
-			ehdokas.etunimi = tiedot.ETUNIMI.value;
-			ehdokas.puolue = tiedot.PUOLUE.value;
-			ehdokas.kotipaikkakunta = tiedot.KOTIPAIKKAKUNTA.value;
-			ehdokas.ika = tiedot.IKA.value;
-			ehdokas.miksiEduskuntaan = tiedot.MIKSI_EDUSKUNTAAN.value;
-			ehdokas.mitaAsioitaHaluatEdistaa = tiedot.MITA_ASIOITA_HALUAT_EDISTAA.value;
-			ehdokas.ammatti = tiedot.AMMATTI.value;
+		<script>
+			function muokkaa() {
+				var tiedot = document.getElementById("muokkaus_lomake");
 
-			var jsonehdokas = JSON.stringify(ehdokas);
-			document.getElementById("tekstikentta").innerHTML = jsonehdokas;
+				var ehdokas = new Object();
+				ehdokas.ehdokasId = tiedot.EHDOKAS_ID.value;
+				ehdokas.sukunimi = tiedot.SUKUNIMI.value;
+				ehdokas.etunimi = tiedot.ETUNIMI.value;
+				ehdokas.puolue = tiedot.PUOLUE.value;
+				ehdokas.kotipaikkakunta = tiedot.KOTIPAIKKAKUNTA.value;
+				ehdokas.ika = tiedot.IKA.value;
+				ehdokas.miksiEduskuntaan = tiedot.MIKSI_EDUSKUNTAAN.value;
+				ehdokas.mitaAsioitaHaluatEdistaa = tiedot.MITA_ASIOITA_HALUAT_EDISTAA.value;
+				ehdokas.ammatti = tiedot.AMMATTI.value;
 
-			var xhttp = new XMLHttpRequest();
+				var jsonehdokas = JSON.stringify(ehdokas);
+				document.getElementById("muokattuteksti").innerHTML = jsonehdokas;
 
-			xhttp.open("POST", "./rest/vaalikone/lisaa", true);
-			xhttp.setRequestHeader("Content-type", "application/json");
-			xhttp.send(jsonehdokas);
-		}
-	</script>
-	<form id="muokkaus_lomake" onsubmit="return false;">
-		<input type="text" name="EHDOKAS_ID" value="" placeholder="ID"><br>
-		<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
-		<input type="text" name="ETUNIMI" value="" placeholder="Etunimi"><br>
-		<input type="text" name="PUOLUE" value="" placeholder="Puolue"><br>
-		<input type="text" name="KOTIPAIKKAKUNTA" value=""
-			placeholder="Kotipaikkakunta"><br> <input type="text"
-			name=IKA value="" placeholder="Ika"><br> <input
-			type="text" name="MIKSI_EDUSKUNTAAN" value=""
-			placeholder="Miksi eduskuntaan?"><br> <input type="text"
-			name="MITA_ASIOITA_HALUAT_EDISTAA" value=""
-			placeholder="Mita haluat edistaa?"><br> <input
-			type="text" name="AMMATTI" value="" placeholder="Ammatti"><br>
+				var xhttp = new XMLHttpRequest();
 
-	</form>
-	<button onclick="muokkaa();">Muokkaa ehdokas</button>
-	<div id='muokattuteksti'></div>
+				xhttp.open("POST", "./rest/vaalikone/muokkaa", true);
+				xhttp.setRequestHeader("Content-type", "application/json");
+				xhttp.send(jsonehdokas);
+			}
+		</script>
 
-	<script>
-		function muokkaa() {
-			var tiedot = document.getElementById("muokkaus_lomake");
 
-			var ehdokas = new Object();
-			ehdokas.ehdokasId = tiedot.EHDOKAS_ID.value;
-			ehdokas.sukunimi = tiedot.SUKUNIMI.value;
-			ehdokas.etunimi = tiedot.ETUNIMI.value;
-			ehdokas.puolue = tiedot.PUOLUE.value;
-			ehdokas.kotipaikkakunta = tiedot.KOTIPAIKKAKUNTA.value;
-			ehdokas.ika = tiedot.IKA.value;
-			ehdokas.miksiEduskuntaan = tiedot.MIKSI_EDUSKUNTAAN.value;
-			ehdokas.mitaAsioitaHaluatEdistaa = tiedot.MITA_ASIOITA_HALUAT_EDISTAA.value;
-			ehdokas.ammatti = tiedot.AMMATTI.value;
+		<form id="poisto_lomake" onsubmit="return false;">
+			<input type="text" name="EHDOKAS_ID" value="" placeholder="ID"><br>
+		<br>
+		</form>
+		<button onclick="poista();">Poista ehdokas</button>
+		<div id='poistettuid'></div>
+		<script>
+			function poista() {
+				var tiedot = document.getElementById("poisto_lomake").EHDOKAS_ID.value;
 
-			var jsonehdokas = JSON.stringify(ehdokas);
-			document.getElementById("muokattuteksti").innerHTML = jsonehdokas;
+				var xhttp = new XMLHttpRequest();
+				
+				 xhttp.onreadystatechange = function() {
+					    if (this.readyState == 4 && this.status == 200) {
+					     document.getElementById("poistettuid").innerHTML = this.responseText;
+					     var palautettu=JSON.parse(this.responseText);
+					    }
+					    else{
+					    }
+					  };
 
-			var xhttp = new XMLHttpRequest();
+				xhttp.open("GET", "./rest/vaalikone/poista/" + tiedot, true);
+				xhttp.send();
+			}
+		</script>
 
-			xhttp.open("POST", "./rest/vaalikone/muokkaa", true);
-			xhttp.setRequestHeader("Content-type", "application/json");
-			xhttp.send(jsonehdokas);
-		}
-	</script>
-	<form id="poisto_lomake" onsubmit="return false;">
-		<input type="text" name="EHDOKAS_ID" value="" placeholder="ID"><br>
+		<br>
+		<br>
+		<form action="/Admin_sivu.jsp">
+			<input type="submit" value="Palaa admin -sivulle" name="btnAdminSivu" />
+		</form>
+		<form action="index.html" method="POST">
+			<input type="submit" value="Palaa etusivulle" name="palaaetusbtn" />
+		</form>
 
-	</form>
-	<button onclick="poista();">Poista ehdokas</button>
-	<div id='poistettuid'></div>
-	<script>
-		function poista() {
-			var tiedot = document.getElementById("poisto_lomake").EHDOKAS_ID.value;
-			console.log(tiedot);
-			/* var ehdokas = new Object();
-			ehdokas.ehdokasId = tiedot.EHDOKAS_ID.value;
-
-			var jsonehdokas = JSON.stringify(ehdokas);
-			document.getElementById("poistettuid").innerHTML = jsonehdokas; */
-
-			var xhttp = new XMLHttpRequest();
-
-			xhttp.open("GET", "./rest/vaalikone/poista/" + tiedot, true);
-			xhttp.send();
-		}
-	</script>
-</body>
-</html>
+	</div>

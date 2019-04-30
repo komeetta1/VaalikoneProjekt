@@ -74,18 +74,20 @@ public class HelloRestWorld {
 	@GET
 	@Path("/poista/{param}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public void poistaEhdokkaat(@PathParam("param")int id) {
+	public String poistaEhdokkaat(@PathParam("param")int id) {
+		String ID = "Poistettu ID " + id;
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
 		try {
 			emf = Persistence.createEntityManagerFactory("vaalikones");
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			Ehdokkaat asd=em.find(Ehdokkaat.class, id);
-			em.remove(asd);
+			Ehdokkaat x=em.find(Ehdokkaat.class, id);
+			em.remove(x);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return ID;
 	}
 }
