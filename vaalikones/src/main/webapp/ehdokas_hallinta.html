@@ -9,6 +9,49 @@
 <body>
 	<div id="container">
 		<img id="headerimg" src="Logo.png" width="720" /> <br>
+		
+		<form id = "ehdokasLista" onsubmit = "return false;">
+		<button onclick="tulostaEhdokkaat();">Tulosta ehdokkaat</button>
+		<select id = "selectId" name = "ehdokkaat" size = "2">
+				<option value = "">kHOOO</option>
+				<option value = "">FFJJ</option>
+				<option value = "">RIRJFIRFJ</option>
+				<option value = "">kiss</option>
+				<option value = "">LKOGJG</option>
+				<option value = "">KOIRO</option>
+				<option value = "">kiss</option>
+				<option value = "">JOONAS</option>
+				<option value = "">DIUDIU</option>
+			</select>
+			<p id="demo"></p>
+		</form>
+		
+		<script>
+			function tulostaEhdokkaat(){
+				
+				var xhttp = new XMLHttpRequest();
+				//document.getElementById("demo").innerHTML = "Tekstia";
+				
+				xhttp.onreadystatechange = function(){
+					if (this.readyState == 4 && this.status == 200){
+						
+						var palautettu = JSON.parse(this.responseText);
+						
+						//document.getElementById("demo").innerHTML = 5 + 6;
+						//console.Log("Perkele! ");
+						//window.alert("Perkele")
+						
+					}
+					palautettu.forEach(function(item, index, array){
+						console.log(item);
+					});
+				};
+				
+				xhttp.open("POST", "./rest/vaalikone/tuoEhdokkaat", true);
+				//document.getElementById("selectId").size="8";
+				
+			}
+		</script>
 
 		<form id="ehdokas_lomake" onsubmit="return false;">
 			<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
@@ -106,13 +149,15 @@
 			function poista() {
 				var tiedot = document.getElementById("poisto_lomake").EHDOKAS_ID.value;
 				console.log(tiedot);
-				/* var ehdokas = new Object();
-				ehdokas.ehdokasId = tiedot.EHDOKAS_ID.value;
-
-				var jsonehdokas = JSON.stringify(ehdokas);
-				document.getElementById("poistettuid").innerHTML = jsonehdokas; */
 
 				var xhttp = new XMLHttpRequest();
+				
+				xhttp.onreadystatechange = function(){
+					if (this.readyState == 4 && this.status == 200){
+						document.getElementById("poistettuid").innerHTML = this.responseText;
+						var palautettu=JSON.parse(this.responseText);
+					}
+				};
 
 				xhttp.open("GET", "./rest/vaalikone/poista/" + tiedot, true);
 				xhttp.send();
