@@ -86,8 +86,8 @@ public class HelloRestWorld {
 			emf = Persistence.createEntityManagerFactory("vaalikones");
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			Ehdokkaat asd=em.find(Ehdokkaat.class, id);
-			em.remove(asd);
+			Ehdokkaat x=em.find(Ehdokkaat.class, id);
+			em.remove(x);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
