@@ -11,7 +11,8 @@
 		<img id="headerimg" src="Logo.png" width="720" /> <br>
 		
 		<form id = "ehdokasLista" onsubmit = "return false;">
-		<select id = "selectId" name = "ehdokkaat" size = "12" onchange='tuoEhdokas(this);'></select>
+		
+		<select id = "selectId" name = "ehdokkaat" size = "20" onchange='tuoEhdokas(this);'></select>
 		</form>
 		
 		
@@ -57,7 +58,7 @@
 
 		<br>
 		</form>
-		<button onclick="muokkaa();">Muokkaa ehdokasta</button><br>
+		<button onclick="muokkaa();" style=color:blue;>Muokkaa ehdokasta</button><br>
 		<button onclick="varmistusPoisto();" style=color:red;>Poista ehdokas</button>
 		<div id='poistettuid'></div>
 		<div id='muokattuteksti'></div>
@@ -135,7 +136,7 @@
 		</form>
 		<br>
 
-		<button onclick="laheta();">Lisaa ehdokas</button><br><br><br>
+		<button onclick="laheta();" style=color:green;>Lisaa ehdokas</button><br><br><br>
 		<div id='tekstikentta'></div>
 
 		<script>
@@ -210,3 +211,4 @@
 		</form>
 
 	</div>
+	</body>
