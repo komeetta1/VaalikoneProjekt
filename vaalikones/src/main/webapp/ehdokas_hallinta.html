@@ -10,21 +10,14 @@
 	<div id="container">
 		<img id="headerimg" src="Logo.png" width="720" /> <br>
 		
-		<form id = "ehdokaslista" onsubmit = "return false;">
-		<select id = "selectId" name = "ehdokkaat" size = "23" onchange='testaaSelect(this);'>
+		<form id = "ehdokasLista" onsubmit = "return false;">
+		<select id = "selectId" name = "ehdokkaat" size = "23" onchange='tuoEhdokas(this);'>
 				
 			</select>
-			<p id="demo">asfasdf</p>
+			<p id="demo">Ehdokkaat</p>
 		</form>
 		
 		<script>
-			function testaaSelect(e){
-				window.alert("Valittu ID: "+e.value);
-			}
-		</script>
-		
-		<script>
-		
 			window.onload = function tulostaEhdokkaat(){
 			
 			var xhttp = new XMLHttpRequest();
@@ -94,7 +87,7 @@
 
 		<h4>Ehdokkaiden muokkaus</h4>
 		<form id="muokkaus_lomake" onsubmit="return false;">
-			<button id="hakunappi" onclick="tuoEhdokas();" value="10">Hae ehdokas nro. 10</button><br>
+			<!-- <button id="hakunappi" onclick="tuoEhdokas();" value="10">Hae ehdokas nro. 10</button><br> -->
 			<input type="text" name="EHDOKAS_ID" value="" placeholder="ID" size=2 disabled><br>
 			<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
 			<input type="text" name="ETUNIMI" value="" placeholder="Etunimi"><br>
@@ -111,9 +104,9 @@
 		<div id='muokattuteksti'></div>
 		
 		<script>
-		function tuoEhdokas() {
+		function tuoEhdokas(e) {
 				var lomake=document.getElementById("muokkaus_lomake");
-				var ehdID = document.getElementById("hakunappi").value;
+				var ehdID = document.getElementById("selectId").value;
 				var xhttp = new XMLHttpRequest();
 				
 				xhttp.onreadystatechange = function() {

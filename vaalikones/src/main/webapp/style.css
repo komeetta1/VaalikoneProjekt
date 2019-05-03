@@ -73,11 +73,12 @@ body {
 	text-align: center;
 }
 
-#ehdokaslista {
+#ehdokasLista {
 	position: absolute;
 	left: 850px;
 }
 
 #ehdokas_lomake {
 	position: relative;
+	width: 480px;
 }
