@@ -11,55 +11,41 @@
 		<img id="headerimg" src="Logo.png" width="720" /> <br>
 		
 		<form id = "ehdokasLista" onsubmit = "return false;">
-		<button onclick="tulostaEhdokkaat();">Tulosta ehdokkaat</button>
-		<select id = "selectId" name = "ehdokkaat" size = "23" onchange='testaaSelect(this);'>
-				
-			</select>
+<!-- 	 		<button onclick="tulostaEhdokkaat();">Tulosta ehdokkaat</button>
+ -->			<select id = "selectId" name = "ehdokkaat" size = "10" onchange='testaaSelect(this);'></select>
+			
 			<p id="demo">tadaa</p>
 		</form>
 		
 		<script>
-		
-		
-		function testaaSelect(e){
-			window.alert("Valittu ID: "+e.value);
-		}
-		
-		
-		
-			function tulostaEhdokkaat(){
-				
-				var xhttp = new XMLHttpRequest();
-				//document.getElementById("demo").innerHTML = "Tekstia";
-				
-				xhttp.onreadystatechange = function(){
-					if (this.readyState == 4 && this.status == 200){
-						
-						var palautettu = JSON.parse(this.responseText);
-						var z = "";
-						for (i=0;i<palautettu.length;i++){
-							var y=palautettu[i];
-							z = z+"<option value='"+y.ehdokasId+"'>"+y.sukunimi+", "+y.etunimi+"</option>\n";
-						}
-						
-						
-//						document.getElementById("demo").innerHTML = "zzzz: "+z;//this.responseText;
-						document.getElementById("selectId").innerHTML = z;//this.responseText;
-						//console.Log("Teksti! ");
-						//window.alert("Teksti")
-						
-					}
-				//	palautettu.forEach(function(item, index, array){
-				//		console.log(item);
-				//	});
-				};
-				
-				xhttp.open("GET", "./rest/vaalikone/tuoEhdokkaat", true);
-				xhttp.send();
-				
-				//document.getElementById("selectId").size="8";
-				
+			function testaaSelect(e){
+				window.alert("Valittu ID: "+e.value);
 			}
+		</script>
+		
+		<script>
+		
+			window.onload = function tulostaEhdokkaat(){
+			
+			var xhttp = new XMLHttpRequest();
+			
+			xhttp.onreadystatechange = function(){
+				if (this.readyState == 4 && this.status == 200){
+					
+					var palautettu = JSON.parse(this.responseText);
+					var z = "";
+					for (i=0;i<palautettu.length;i++){
+						var y=palautettu[i];
+						z = z+"<option value='"+y.ehdokasId+"'>"+y.sukunimi+", "+y.etunimi+"</option>\n";
+						//document.getElementById("selectId").size = z;
+					}
+					document.getElementById("selectId").innerHTML = z;
+					
+				}
+			};
+			xhttp.open("GET", "./rest/vaalikone/tuoEhdokkaat", true);
+			xhttp.send();
+		}
 		</script>
 
 		<form id="ehdokas_lomake" onsubmit="return false;">
@@ -104,7 +90,8 @@
 
 
 		<form id="muokkaus_lomake" onsubmit="return false;">
-			<input type="text" name="EHDOKAS_ID" value="" placeholder="ID"><br>
+			<button id="hakunappi" onclick="tuoEhdokas();" value="10">Hae ehdokas nro. 10</button><br>
+			<input type="text" name="EHDOKAS_ID" value="" placeholder="ID" size=2 disabled><br>
 			<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
 			<input type="text" name="ETUNIMI" value="" placeholder="Etunimi"><br>
 			<input type="text" name="PUOLUE" value="" placeholder="Puolue"><br>
@@ -119,6 +106,35 @@
 		<button onclick="muokkaa();">Muokkaa ehdokasta</button><br><br><br>
 		<div id='muokattuteksti'></div>
 		
+		<script>
+		function tuoEhdokas() {
+				var lomake=document.getElementById("muokkaus_lomake");
+				var ehdID = document.getElementById("hakunappi").value;
+				var xhttp = new XMLHttpRequest();
+				
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200){
+						
+					     var palautettu=JSON.parse(this.responseText);
+					     
+					     lomake.EHDOKAS_ID.value=palautettu.ehdokasId;
+					     lomake.SUKUNIMI.value=palautettu.sukunimi;
+					     lomake.ETUNIMI.value=palautettu.etunimi;
+					     lomake.PUOLUE.value=palautettu.puolue;
+					     lomake.KOTIPAIKKAKUNTA.value=palautettu.kotipaikkakunta;
+					     lomake.IKA.value=palautettu.ika;
+					     lomake.MIKSI_EDUSKUNTAAN.value=palautettu.miksiEduskuntaan;
+					     lomake.MITA_ASIOITA_HALUAT_EDISTAA.value=palautettu.mitaAsioitaHaluatEdistaa;
+					     lomake.AMMATTI.value=palautettu.ammatti;
+					}
+					else {
+						lomake.AMMATTI.value="Pieleen män!";
+					}
+ 				};
+				xhttp.open("POST", "./rest/vaalikone/haeEhdokas", true);
+				xhttp.send(ehdID);
+			}
+			</script>
 
 		<script>
 			function muokkaa() {

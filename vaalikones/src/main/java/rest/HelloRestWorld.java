@@ -123,5 +123,39 @@ public class HelloRestWorld {
         return null;
 	}
 	
+	//Ehdokkaan tiedon hakeminen
+		@SuppressWarnings("unchecked")
+		@POST
+		@Path("/haeEhdokas")
+		@Consumes(MediaType.TEXT_PLAIN)
+		@Produces(MediaType.APPLICATION_JSON)
+		public Ehdokkaat haeEhdokas(String ehdokasNro) {
+			EntityManagerFactory emf = null;
+			EntityManager em = null;
+			
+			System.out.println("Restille lähetetty ehdokasID: "+ehdokasNro);
+			
+			int x = Integer.parseInt(ehdokasNro);
+			try {
+		  	      emf=Persistence.createEntityManagerFactory("vaalikones");
+		  	      em = emf.createEntityManager();
+		  	      
+		  	      List<Ehdokkaat>ehdokas = new ArrayList<>();
+		  	     
+		  	      ehdokas = em.createNamedQuery("Ehdokkaat.findByEhdokasId")
+		  	    		  .setParameter("ehdokasId", x)
+						.getResultList();
+
+		  	      return ehdokas.get(0);
+
+		        }
+		        catch(Exception e) {
+		        	System.out.println("Olen virhe. I am Error.");
+		        	e.printStackTrace();
+		          	return null;//return new Ehdokkaat();         	
+		        }
+
+		}
+	
 	
 }
