@@ -57,7 +57,9 @@
 
 		<br>
 		</form>
-		<button onclick="muokkaa();">Muokkaa ehdokasta</button><br><br><br>
+		<button onclick="muokkaa();">Muokkaa ehdokasta</button><br>
+		<button onclick="varmistusPoisto();" style=color:red;>Poista ehdokas</button>
+		<div id='poistettuid'></div>
 		<div id='muokattuteksti'></div>
 		
 		<script>
@@ -113,6 +115,9 @@
 				xhttp.open("POST", "./rest/vaalikone/muokkaa", true);
 				xhttp.setRequestHeader("Content-type", "application/json");
 				xhttp.send(jsonehdokas);
+				
+				alert("Ehdokkaan tiedot muokattu!");
+				location.reload();
 			}
 		</script>
 		
@@ -155,21 +160,18 @@
 				xhttp.open("POST", "./rest/vaalikone/lisaa", true);
 				xhttp.setRequestHeader("Content-type", "application/json");
 				xhttp.send(jsonehdokas);
+				
+				alert("Uusi ehdokas lisatty!");
+				location.reload();
 			}
 		</script>
 		
 
 
-		<h4>Ehdokkaiden poisto</h4>
-		<form id="poisto_lomake" onsubmit="return false;">
-			<input type="text" name="EHDOKAS_ID" value="" placeholder="ID"><br>
-		<br>
-		</form>
-		<button onclick="poista();">Poista ehdokas</button>
-		<div id='poistettuid'></div>
+		
 		<script>
 			function poista() {
-				var tiedot = document.getElementById("poisto_lomake").EHDOKAS_ID.value;
+				var tiedot = document.getElementById("selectId").value;
 				console.log(tiedot);
 
 				var xhttp = new XMLHttpRequest();
@@ -183,6 +185,18 @@
 
 				xhttp.open("GET", "./rest/vaalikone/poista/" + tiedot, true);
 				xhttp.send();
+
+				location.reload();
+			}
+			
+			function varmistusPoisto(){
+				var txt;
+				if (confirm("Haluatko varmasti poistaa ehdokkaan?")){
+					alert("Ehdokas poistettu!");
+					poista();
+				}else{
+					txt = "Cancel";
+				}
 			}
 		</script>
 
