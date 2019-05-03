@@ -1,7 +1,6 @@
 @charset "UTF-8";
 /* CSS Document */
-
-#container{
+#container {
 	width: 800px;
 	float: none;
 	border-radius: 20px;
@@ -13,13 +12,15 @@
 	margin-right: auto;
 	background-image: url(images/concrete_seamless.png);
 	padding: 20px;
-        font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
 body {
 	background-image: url(images/wild_oliva.png);
 	padding: 10;
 	background-repeat: repeat;
 }
+
 #headerimg {
 	margin-left: auto;
 	margin-right: auto;
@@ -28,6 +29,7 @@ body {
 	display: block;
 	padding-top: 10px;
 }
+
 #kysymyscont {
 	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	margin-left: auto;
@@ -36,17 +38,20 @@ body {
 	display: block;
 	height: 150px;
 }
-.kysymys{
+
+.kysymys {
 	width: 600px;
 	margin-left: auto;
 	margin-right: auto;
-        padding-top: 50px;
+	padding-top: 50px;
 	height: 100px;
 	color: #3E3E3E;
-	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
+	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold",
+		"Arial Black", sans-serif;
 	text-align: center;
 }
-#submitnappi{
+
+#submitnappi {
 	float: none;
 	margin-left: auto;
 	margin-right: auto;
@@ -54,16 +59,25 @@ body {
 	height: 50px;
 	display: block;
 	margin-top: 20px;
-	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
+	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold",
+		"Arial Black", sans-serif;
 	font-style: normal;
 	font-size: large;
 }
-#vastausformi{
+
+#vastausformi {
 	height: 100px;
 	width: 500px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
-	}
-	
-	
+}
+
+#ehdokaslista {
+	position: absolute;
+	left: 850px;
+}
+
+#ehdokas_lomake {
+	position: relative;
+}
