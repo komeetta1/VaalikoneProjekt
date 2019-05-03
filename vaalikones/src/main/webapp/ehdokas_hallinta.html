@@ -10,7 +10,7 @@
 	<div id="container">
 		<img id="headerimg" src="Logo.png" width="720" /> <br>
 		
-		<form id = "ehdokasLista" onsubmit = "return false;">
+		<form id = "ehdokaslista" onsubmit = "return false;">
 		<select id = "selectId" name = "ehdokkaat" size = "23" onchange='testaaSelect(this);'>
 				
 			</select>
@@ -46,45 +46,10 @@
 			xhttp.open("GET", "./rest/vaalikone/tuoEhdokkaat", true);
 			xhttp.send();
 		}
-		
-		
-		
-			function tulostaEhdokkaat(){
 				
-				var xhttp = new XMLHttpRequest();
-				//document.getElementById("demo").innerHTML = "Tekstia";
-				
-				xhttp.onreadystatechange = function(){
-					if (this.readyState == 4 && this.status == 200){
-						
-						var palautettu = JSON.parse(this.responseText);
-						var z = "";
-						for (i=0;i<palautettu.length;i++){
-							var y=palautettu[i];
-							z = z+"<option value='"+y.ehdokasId+"'>"+y.sukunimi+", "+y.etunimi+"</option>\n";
-						}
-						
-						
-//						document.getElementById("demo").innerHTML = "zzzz: "+z;//this.responseText;
-						document.getElementById("selectId").innerHTML = z;//this.responseText;
-						//console.Log("Teksti! ");
-						//window.alert("Teksti")
-						
-					}
-				//	palautettu.forEach(function(item, index, array){
-				//		console.log(item);
-				//	});
-				};
-				
-				xhttp.open("GET", "./rest/vaalikone/tuoEhdokkaat", true);
-				xhttp.send();
-				
-				//document.getElementById("selectId").size="8";
-				
-			}
 		</script>
 		
-		<h4>Ehdokkaiden lis�ys</h4>
+		<h4>Ehdokkaiden lisays</h4>
 
 		<form id="ehdokas_lomake" onsubmit="return false;">
 			<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
