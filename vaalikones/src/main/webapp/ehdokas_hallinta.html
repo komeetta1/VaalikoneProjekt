@@ -12,21 +12,21 @@
 		
 		<form id = "ehdokasLista" onsubmit = "return false;">
 		<button onclick="tulostaEhdokkaat();">Tulosta ehdokkaat</button>
-		<select id = "selectId" name = "ehdokkaat" size = "2">
-				<option value = "">kHOOO</option>
-				<option value = "">FFJJ</option>
-				<option value = "">RIRJFIRFJ</option>
-				<option value = "">kiss</option>
-				<option value = "">LKOGJG</option>
-				<option value = "">KOIRO</option>
-				<option value = "">kiss</option>
-				<option value = "">JOONAS</option>
-				<option value = "">DIUDIU</option>
+		<select id = "selectId" name = "ehdokkaat" size = "23" onchange='testaaSelect(this);'>
+				
 			</select>
-			<p id="demo"></p>
+			<p id="demo">tadaa</p>
 		</form>
 		
 		<script>
+		
+		
+		function testaaSelect(e){
+			window.alert("Valittu ID: "+e.value);
+		}
+		
+		
+		
 			function tulostaEhdokkaat(){
 				
 				var xhttp = new XMLHttpRequest();
@@ -36,18 +36,27 @@
 					if (this.readyState == 4 && this.status == 200){
 						
 						var palautettu = JSON.parse(this.responseText);
+						var z = "";
+						for (i=0;i<palautettu.length;i++){
+							var y=palautettu[i];
+							z = z+"<option value='"+y.ehdokasId+"'>"+y.sukunimi+", "+y.etunimi+"</option>\n";
+						}
 						
-						//document.getElementById("demo").innerHTML = 5 + 6;
-						//console.Log("Perkele! ");
-						//window.alert("Perkele")
+						
+//						document.getElementById("demo").innerHTML = "zzzz: "+z;//this.responseText;
+						document.getElementById("selectId").innerHTML = z;//this.responseText;
+						//console.Log("Teksti! ");
+						//window.alert("Teksti")
 						
 					}
-					palautettu.forEach(function(item, index, array){
-						console.log(item);
-					});
+				//	palautettu.forEach(function(item, index, array){
+				//		console.log(item);
+				//	});
 				};
 				
-				xhttp.open("POST", "./rest/vaalikone/tuoEhdokkaat", true);
+				xhttp.open("GET", "./rest/vaalikone/tuoEhdokkaat", true);
+				xhttp.send();
+				
 				//document.getElementById("selectId").size="8";
 				
 			}

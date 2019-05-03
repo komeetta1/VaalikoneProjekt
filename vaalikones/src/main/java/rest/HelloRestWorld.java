@@ -109,8 +109,9 @@ public class HelloRestWorld {
         }
         try {
         	List<Ehdokkaat> lista = new ArrayList<>();
-        	Query query = em.createNativeQuery("SELECT ehdokas_id, sukunimi, etunimi FROM ehdokkaat");
-        	lista = query.getResultList();
+        	//Query query = em.createNativeQuery("SELECT ehdokas_id, sukunimi, etunimi FROM ehdokkaat");
+        	Query x=em.createQuery("select a from Ehdokkaat a");
+        	lista = (List<Ehdokkaat>)(x.getResultList());
         	return lista;
         	
 		} catch (Exception e) {
