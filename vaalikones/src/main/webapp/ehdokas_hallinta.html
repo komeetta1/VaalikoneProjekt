@@ -11,26 +11,22 @@
 		<img id="headerimg" src="Logo.png" width="720" /> <br>
 		
 		<form id = "ehdokasLista" onsubmit = "return false;">
-		<button onclick="tulostaEhdokkaat();">Tulosta ehdokkaat</button>
 		<select id = "selectId" name = "ehdokkaat" size = "23" onchange='testaaSelect(this);'>
 				
 			</select>
-			<p id="demo">tadaa</p>
+			<p id="demo">tjdshgkjg</p>
 		</form>
 		
 		<script>
-		
 		
 		function testaaSelect(e){
 			window.alert("Valittu ID: "+e.value);
 		}
 		
-		
-		
-			function tulostaEhdokkaat(){
+
+		window.onload = function tulostaEhdokkaat(){
 				
 				var xhttp = new XMLHttpRequest();
-				//document.getElementById("demo").innerHTML = "Tekstia";
 				
 				xhttp.onreadystatechange = function(){
 					if (this.readyState == 4 && this.status == 200){
@@ -42,25 +38,19 @@
 							z = z+"<option value='"+y.ehdokasId+"'>"+y.sukunimi+", "+y.etunimi+"</option>\n";
 						}
 						
+						document.getElementById("selectId").innerHTML = z;
 						
-//						document.getElementById("demo").innerHTML = "zzzz: "+z;//this.responseText;
-						document.getElementById("selectId").innerHTML = z;//this.responseText;
-						//console.Log("Teksti! ");
-						//window.alert("Teksti")
-						
-					}
-				//	palautettu.forEach(function(item, index, array){
-				//		console.log(item);
-				//	});
+					}	
 				};
+				window.onload
 				
 				xhttp.open("GET", "./rest/vaalikone/tuoEhdokkaat", true);
 				xhttp.send();
 				
-				//document.getElementById("selectId").size="8";
-				
 			}
 		</script>
+		
+		<h4>Ehdokkaiden lisäys</h4>
 
 		<form id="ehdokas_lomake" onsubmit="return false;">
 			<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
@@ -103,6 +93,7 @@
 		</script>
 
 
+		<h4>Ehdokkaiden muokkaus</h4>
 		<form id="muokkaus_lomake" onsubmit="return false;">
 			<input type="text" name="EHDOKAS_ID" value="" placeholder="ID"><br>
 			<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
@@ -147,6 +138,7 @@
 		</script>
 
 
+		<h4>Ehdokkaiden poisto</h4>
 		<form id="poisto_lomake" onsubmit="return false;">
 			<input type="text" name="EHDOKAS_ID" value="" placeholder="ID"><br>
 		<br>
