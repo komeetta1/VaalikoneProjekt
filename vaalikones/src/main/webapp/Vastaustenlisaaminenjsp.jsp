@@ -26,7 +26,14 @@
 		<img id="headerimg" src="Logo.png" width="720" />
 		<div class="kysymys">
 			<h1>Vaalikone</h1>
-			<br>
+			
+			<form action="/Admin_sivu.jsp">
+			<input type="submit" value="Palaa admin -sivulle" name="btnAdminSivu" />
+			</form>
+			<form action="index.html" method="POST">
+				<input type="submit" value="Palaa etusivulle" name="palaaetusbtn" />
+			</form>
+			
 			<h3>Kysymyksiin vastaaminen</h3>
 		</div>
 		<br>

@@ -10,15 +10,10 @@
 	<div id="container">
 		<img id="headerimg" src="Logo.png" width="720" /> <br>
 		
-		<form id = "ehdokaslista" onsubmit = "return false;">
-		<select id = "selectId" name = "ehdokkaat" size = "23" onchange='tuoEhdokas(this);'></select>
+		<form id = "ehdokasLista" onsubmit = "return false;">
+		<select id = "selectId" name = "ehdokkaat" size = "12" onchange='tuoEhdokas(this);'></select>
 		</form>
 		
-		<script>
-			function testaaSelect(e){
-				window.alert("Valittu ID: "+e.value);
-			}
-		</script>
 		
 		<script>
 		
@@ -46,48 +41,7 @@
 				
 		</script>
 		
-		<h4>Ehdokkaiden lisays</h4>
-
-		<form id="ehdokas_lomake" onsubmit="return false;">
-			<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
-			<input type="text" name="ETUNIMI" value="" placeholder="Etunimi"><br>
-			<input type="text" name="PUOLUE" value="" placeholder="Puolue"><br>
-			<input type="text" name="KOTIPAIKKAKUNTA" value="" placeholder="Kotipaikkakunta"><br> 
-			<input type="text" name=IKA value="" placeholder="Ika"><br> 
-			<input type="text" name="MIKSI_EDUSKUNTAAN" value="" placeholder="Miksi eduskuntaan?"><br>
-			<textarea rows="4" cols="50" name="MITA_ASIOITA_HALUAT_EDISTAA" placeholder = "Mita asioita haluat edistaa?"></textarea><br>
-			<input type="text" name="AMMATTI" value="" placeholder="Ammatti"><br>
-		</form>
-		<br>
-
-		<button onclick="laheta();">Lisaa ehdokas</button><br><br><br>
-		<div id='tekstikentta'></div>
-
-		<script>
-			function laheta() {
-				var tiedot = document.getElementById("ehdokas_lomake");
-
-				var ehdokas = new Object();
-				ehdokas.sukunimi = tiedot.SUKUNIMI.value;
-				ehdokas.etunimi = tiedot.ETUNIMI.value;
-				ehdokas.puolue = tiedot.PUOLUE.value;
-				ehdokas.kotipaikkakunta = tiedot.KOTIPAIKKAKUNTA.value;
-				ehdokas.ika = tiedot.IKA.value;
-				ehdokas.miksiEduskuntaan = tiedot.MIKSI_EDUSKUNTAAN.value;
-				ehdokas.mitaAsioitaHaluatEdistaa = tiedot.MITA_ASIOITA_HALUAT_EDISTAA.value;
-				ehdokas.ammatti = tiedot.AMMATTI.value;
-
-				var jsonehdokas = JSON.stringify(ehdokas);
-				document.getElementById("tekstikentta").innerHTML = jsonehdokas;
-
-				var xhttp = new XMLHttpRequest();
-
-				xhttp.open("POST", "./rest/vaalikone/lisaa", true);
-				xhttp.setRequestHeader("Content-type", "application/json");
-				xhttp.send(jsonehdokas);
-			}
-		</script>
-
+		
 
 		<h4>Ehdokkaiden muokkaus</h4>
 		<form id="muokkaus_lomake" onsubmit="return false;">
@@ -152,7 +106,7 @@
 				ehdokas.ammatti = tiedot.AMMATTI.value;
 
 				var jsonehdokas = JSON.stringify(ehdokas);
-				document.getElementById("muokattuteksti").innerHTML = jsonehdokas;
+				document.getElementById("muokattuteksti").innerHTML = "Ehdokas muokattu!";
 
 				var xhttp = new XMLHttpRequest();
 
@@ -161,6 +115,49 @@
 				xhttp.send(jsonehdokas);
 			}
 		</script>
+		
+		<h4>Ehdokkaiden lisays</h4>
+
+		<form id="ehdokas_lomake" onsubmit="return false;">
+			<input type="text" name="SUKUNIMI" value="" placeholder="Sukunimi"><br>
+			<input type="text" name="ETUNIMI" value="" placeholder="Etunimi"><br>
+			<input type="text" name="PUOLUE" value="" placeholder="Puolue"><br>
+			<input type="text" name="KOTIPAIKKAKUNTA" value="" placeholder="Kotipaikkakunta"><br> 
+			<input type="text" name=IKA value="" placeholder="Ika"><br> 
+			<input type="text" name="MIKSI_EDUSKUNTAAN" value="" placeholder="Miksi eduskuntaan?"><br>
+			<textarea rows="4" cols="50" name="MITA_ASIOITA_HALUAT_EDISTAA" placeholder = "Mita asioita haluat edistaa?"></textarea><br>
+			<input type="text" name="AMMATTI" value="" placeholder="Ammatti"><br>
+		</form>
+		<br>
+
+		<button onclick="laheta();">Lisaa ehdokas</button><br><br><br>
+		<div id='tekstikentta'></div>
+
+		<script>
+			function laheta() {
+				var tiedot = document.getElementById("ehdokas_lomake");
+
+				var ehdokas = new Object();
+				ehdokas.sukunimi = tiedot.SUKUNIMI.value;
+				ehdokas.etunimi = tiedot.ETUNIMI.value;
+				ehdokas.puolue = tiedot.PUOLUE.value;
+				ehdokas.kotipaikkakunta = tiedot.KOTIPAIKKAKUNTA.value;
+				ehdokas.ika = tiedot.IKA.value;
+				ehdokas.miksiEduskuntaan = tiedot.MIKSI_EDUSKUNTAAN.value;
+				ehdokas.mitaAsioitaHaluatEdistaa = tiedot.MITA_ASIOITA_HALUAT_EDISTAA.value;
+				ehdokas.ammatti = tiedot.AMMATTI.value;
+
+				var jsonehdokas = JSON.stringify(ehdokas);
+ 				document.getElementById("tekstikentta").innerHTML = "Ehdokas lisatty!";
+ 
+				var xhttp = new XMLHttpRequest();
+
+				xhttp.open("POST", "./rest/vaalikone/lisaa", true);
+				xhttp.setRequestHeader("Content-type", "application/json");
+				xhttp.send(jsonehdokas);
+			}
+		</script>
+		
 
 
 		<h4>Ehdokkaiden poisto</h4>

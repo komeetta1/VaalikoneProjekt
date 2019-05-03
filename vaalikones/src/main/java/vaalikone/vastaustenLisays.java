@@ -22,7 +22,7 @@ import persist.*;
  * Servlet implementation class vastaustenLisays
  */
 @WebServlet(name= "vastaustenLisays",
-		description = "Lisää vastauksen tietokantaan", 
+		description = "Lisï¿½ï¿½ vastauksen tietokantaan", 
 			urlPatterns = { "/vastaustenLisays" })
 public class vastaustenLisays extends HttpServlet {
 	
@@ -34,7 +34,7 @@ public class vastaustenLisays extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Vastaustenlisaaminenjsp:ltä saatuja vastauksen parametrejä:
+		// Vastaustenlisaaminenjsp:ltï¿½ saatuja vastauksen parametrejï¿½:
 		// MALLI: request.getParameter("parametrin nimi");
 		
 		RequestDispatcher rdKH=request.getRequestDispatcher("KysymystenHaku");
@@ -74,13 +74,13 @@ public class vastaustenLisays extends HttpServlet {
 			perustelu = null;
 		}
 		
-		// Lähettää vastaaja-parametrin VastaustenHaku-servletille
+		// Lï¿½hettï¿½ï¿½ vastaaja-parametrin VastaustenHaku-servletille
 		request.setAttribute("vastannut", vastaaja);
 		
 		// Debuggausta varten kirjoittaa konsoliin asioita
 		System.out.println("Vastaaja oli: "+vastaaja);
 		//System.out.println("Kysymys oli: "+kysymysSTR);
-		System.out.println("Kysymyksiä kannassa: "+lkm);
+		System.out.println("Kysymyksiï¿½ kannassa: "+lkm);
 		
 		for (int i=0; i<lkm;i++) {
 			System.out.print("Vastaus kysymykseen: "+kysymysnro[i]);
@@ -88,9 +88,9 @@ public class vastaustenLisays extends HttpServlet {
 			System.out.println("Ja perustelut: "+perustelu[i]+"\n");
 		}
 		
-		// Tulostaa selaimeen tekstiä merkkinä että virheitä ei esiintynyt:
+		// Tulostaa selaimeen tekstiï¿½ merkkinï¿½ ettï¿½ virheitï¿½ ei esiintynyt:
 		//response.getWriter().println(" ! KABOOM YEAH !");
-		System.out.println("KABOOM YEAH, tavaraa meni kantaan, ehkä?");
+		System.out.println("KABOOM YEAH, tavaraa meni kantaan, ehkï¿½?");
 		
 		// Luodaan vastauksesta, siis yhden kysymyksen vastauksesta olio.
 		
@@ -109,7 +109,7 @@ public class vastaustenLisays extends HttpServlet {
 			lisaaVastaus(vastausolio, onvst);
 		}
 
-		response.sendRedirect("http://localhost:8080/uusi_kysymys.jsp");
+		response.sendRedirect("http://localhost:8080/Vastaustenlisaaminenjsp.jsp");
 	}
 	
 	public void lisaaVastaus(Vastaukset kysymyksenvastaus, boolean onvst){
@@ -132,7 +132,7 @@ public class vastaustenLisays extends HttpServlet {
 			}
 			
 		} catch(EntityExistsException exe) {
-			// KIRJOITA TÄHÄN VIRHEILMOITUS TMS. !
+			// KIRJOITA Tï¿½Hï¿½N VIRHEILMOITUS TMS. !
 		}
 		em.getTransaction().commit();
 		em.close();
