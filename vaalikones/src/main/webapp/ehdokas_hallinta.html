@@ -11,11 +11,34 @@
 		<img id="headerimg" src="Logo.png" width="720" /> <br>
 		
 		<form id = "ehdokasLista" onsubmit = "return false;">
-		
-		<select id = "selectId" name = "ehdokkaat" size = "20" onchange='tuoEhdokas(this);'></select>
+		<select id = "selectId" name = "ehdokkaat" size = "30" onchange='tuoEhdokas(this);'></select>
+
 		</form>
-		
-		
+		<!-- Refresh -->
+		<script>
+
+		function refresh(){
+
+			var xhttp = new XMLHttpRequest();
+			
+			xhttp.onreadystatechange = function(){
+				if (this.readyState == 4 && this.status == 200){
+					
+					var palautettu = JSON.parse(this.responseText);
+					var z = "";
+					for (i=0;i<palautettu.length;i++){
+						var y=palautettu[i];
+						z = z+"<option value='"+y.ehdokasId+"'>"+y.sukunimi+", "+y.etunimi+"</option>\n";
+					}
+					document.getElementById("selectId").innerHTML = z;
+					
+				}
+			};
+			xhttp.open("GET", "./rest/vaalikone/tuoEhdokkaat", true);
+			xhttp.send();
+		}
+		</script>
+		<!-- Ehdokaslista -->
 		<script>
 		
 			window.onload = function tulostaEhdokkaat(){
@@ -30,7 +53,6 @@
 					for (i=0;i<palautettu.length;i++){
 						var y=palautettu[i];
 						z = z+"<option value='"+y.ehdokasId+"'>"+y.sukunimi+", "+y.etunimi+"</option>\n";
-						//document.getElementById("selectId").size = z;
 					}
 					document.getElementById("selectId").innerHTML = z;
 					
@@ -38,12 +60,9 @@
 			};
 			xhttp.open("GET", "./rest/vaalikone/tuoEhdokkaat", true);
 			xhttp.send();
-		}
-				
+		}	
 		</script>
 		
-		
-
 		<h4>Ehdokkaiden muokkaus</h4>
 		<form id="muokkaus_lomake" onsubmit="return false;">
 			<input type="text" name="EHDOKAS_ID" value="" placeholder="ID" size=2 disabled><br>
@@ -52,9 +71,9 @@
 			<input type="text" name="PUOLUE" value="" placeholder="Puolue"><br>
 			<input type="text" name="KOTIPAIKKAKUNTA" value="" placeholder="Kotipaikkakunta"><br> 
 			<input type="text" name=IKA value="" placeholder="Ika"><br> 
-			<input type="text" name="MIKSI_EDUSKUNTAAN" value="" placeholder="Miksi eduskuntaan?"><br> 
+			<textarea rows = "2" cols="50" name="MIKSI_EDUSKUNTAAN" placeholder="Miksi eduskuntaan?"></textarea><br> 
 			<textarea rows="4" cols="50" name="MITA_ASIOITA_HALUAT_EDISTAA" placeholder = "Mita asioita haluat edistaa?"></textarea><br>
-			<input type="text" name="AMMATTI" value="" placeholder="Ammatti"><br>
+			<textarea rows="1"cols="50" name="AMMATTI" placeholder="Ammatti"></textarea><br>
 
 		<br>
 		</form>
@@ -63,6 +82,7 @@
 		<div id='poistettuid'></div>
 		<div id='muokattuteksti'></div>
 		
+		<!-- tuo ehdokkaat tekstikenttiin -->
 		<script>
 		function tuoEhdokas(e) {
 				var lomake=document.getElementById("muokkaus_lomake");
@@ -92,7 +112,8 @@
 				xhttp.send(ehdID);
 			}
 			</script>
-
+		
+		<!-- ehdokkaiden muokkaus -->
 		<script>
 			function muokkaa() {
 				var tiedot = document.getElementById("muokkaus_lomake");
@@ -109,16 +130,20 @@
 				ehdokas.ammatti = tiedot.AMMATTI.value;
 
 				var jsonehdokas = JSON.stringify(ehdokas);
-				document.getElementById("muokattuteksti").innerHTML = "Ehdokas muokattu!";
+				document.getElementById("muokattuteksti").innerHTML = "Ehdokas " + ehdokas.ehdokasId + " muokattu!";
 
 				var xhttp = new XMLHttpRequest();
 
 				xhttp.open("POST", "./rest/vaalikone/muokkaa", true);
 				xhttp.setRequestHeader("Content-type", "application/json");
 				xhttp.send(jsonehdokas);
+				setTimeout(function(){
+					refresh();
+					console.log("ehdokkaiden muokkaus refresh");
+				},500);
 				
-				alert("Ehdokkaan tiedot muokattu!");
-				location.reload();
+				/* alert("Ehdokkaan tiedot muokattu!");
+				location.reload(); */
 			}
 		</script>
 		
@@ -130,15 +155,16 @@
 			<input type="text" name="PUOLUE" value="" placeholder="Puolue"><br>
 			<input type="text" name="KOTIPAIKKAKUNTA" value="" placeholder="Kotipaikkakunta"><br> 
 			<input type="text" name=IKA value="" placeholder="Ika"><br> 
-			<input type="text" name="MIKSI_EDUSKUNTAAN" value="" placeholder="Miksi eduskuntaan?"><br>
+			<textarea rows = "2" cols="50" name="MIKSI_EDUSKUNTAAN" placeholder="Miksi eduskuntaan?"></textarea><br> 
 			<textarea rows="4" cols="50" name="MITA_ASIOITA_HALUAT_EDISTAA" placeholder = "Mita asioita haluat edistaa?"></textarea><br>
-			<input type="text" name="AMMATTI" value="" placeholder="Ammatti"><br>
+			<textarea rows="1"cols="50" name="AMMATTI" placeholder="Ammatti"></textarea><br>
 		</form>
 		<br>
 
 		<button onclick="laheta();" style=color:green;>Lisaa ehdokas</button><br><br><br>
 		<div id='tekstikentta'></div>
-
+		
+		<!-- ehdokkaiden lisäys -->
 		<script>
 			function laheta() {
 				var tiedot = document.getElementById("ehdokas_lomake");
@@ -161,15 +187,14 @@
 				xhttp.open("POST", "./rest/vaalikone/lisaa", true);
 				xhttp.setRequestHeader("Content-type", "application/json");
 				xhttp.send(jsonehdokas);
-				
-				alert("Uusi ehdokas lisatty!");
-				location.reload();
+				setTimeout(function(){
+					refresh();
+					console.log("ehdokkaiden lisäys refresh");
+				},500);
 			}
+			
 		</script>
-		
-
-
-		
+		<!-- ehdokkaiden poisto -->
 		<script>
 			function poista() {
 				var tiedot = document.getElementById("selectId").value;
@@ -187,7 +212,9 @@
 				xhttp.open("GET", "./rest/vaalikone/poista/" + tiedot, true);
 				xhttp.send();
 
-				location.reload();
+				//location.reload();
+				refresh();
+				
 			}
 			
 			function varmistusPoisto(){
